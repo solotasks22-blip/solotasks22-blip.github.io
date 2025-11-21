@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Dev Assets | Premium Game Kits</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        roblox: {
+                            dark: '#111827',
+                            card: '#1F2937',
+                            accent: '#00C4CC', // Cyan
+                            purple: '#8B5CF6', // Violet
+                            red: '#EF4444',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f1115;
+            color: #ffffff;
+        }
+        .glass-card {
+            background: rgba(31, 41, 55, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #00C4CC, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .shine-effect:hover::after {
+            left: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-cube text-roblox-accent text-2xl"></i>
+                    <span class="font-bold text-xl tracking-wide">RBX<span class="text-roblox-purple">Assets</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#platformer" class="hover:text-roblox-accent transition px-3 py-2 rounded-md text-sm font-medium">Platformer Kit</a>
+                        <a href="#mechanics" class="hover:text-roblox-purple transition px-3 py-2 rounded-md text-sm font-medium">Mechanics Suite</a>
+                        <a href="#bundle" class="bg-gradient-to-r from-roblox-accent to-roblox-purple text-white px-4 py-2 rounded-full font-bold hover:opacity-90 transition text-sm">Get the Bundle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative pt-32 pb-20 sm:pt-40 sm:pb-24 overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-roblox-purple/10 to-roblox-dark"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight mb-6">
+                Build Your Dream <br>
+                <span class="gradient-text">Roblox Game</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400">
+                Professional, optimized, and ready-to-use asset packs for developers.
+                Start your project today with our premium systems.
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <a href="#bundle" class="shine-effect bg-white text-gray-900 px-8 py-3 rounded-lg font-bold hover:bg-gray-200 transition transform hover:scale-105">
+                    View Special Offer
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+            <!-- PRODUCT 1: 30 EURO GAME -->
+            <div id="platformer" class="glass-card rounded-2xl p-1 flex flex-col h-full hover:border-roblox-accent/50 transition duration-300">
+                <div class="bg-gray-800 rounded-xl overflow-hidden relative group h-64">
+                    <!-- YouTube Embed (Updated with nocookie and modestbranding for better compatibility) -->
+                    <iframe class="w-full h-full object-cover" 
+                            src="https://www.youtube-nocookie.com/embed/8BFp8snnBsg?rel=0&modestbranding=1" 
+                            title="Agile Platformer Preview" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                    <!-- Fallback link in case embed is blocked by browser policies -->
+                    <a href="https://www.youtube.com/watch?v=8BFp8snnBsg" target="_blank" class="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
+                        <i class="fa-solid fa-external-link-alt"></i> Watch on YouTube
+                    </a>
+                </div>
+                
+                <div class="p-8 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Agile Platformer System</h3>
+                            <p class="text-roblox-accent text-sm font-semibold mt-1">Complete Game Template</p>
+                        </div>
+                        <div class="bg-gray-700 px-4 py-2 rounded-lg">
+                            <span class="text-2xl font-bold text-white">€45</span>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-400 mb-6 text-sm">
+                        A complete, ready-to-use platformer featuring an entire map and dynamic systems. Perfect for jump-start projects!
+                    </p>
+
+                    <div class="space-y-3 mb-8 flex-1">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-400 mt-1"></i>
+                            <span class="text-gray-300 text-sm"><strong>Grass Reaction System:</strong> Visual effects based on player movement.</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-400 mt-1"></i>
+                            <span class="text-gray-300 text-sm"><strong>Agile Movement:</strong> Smooth controls optimized for platforming.</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-400 mt-1"></i>
+                            <span class="text-gray-300 text-sm"><strong>Optimized Particles:</strong> Runs smoothly on all devices.</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-400 mt-1"></i>
+                            <span class="text-gray-300 text-sm"><strong>Zoned Music:</strong> Dynamic atmosphere system included.</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-400 mt-1"></i>
+                            <span class="text-gray-300 text-sm"><strong>Full Map:</strong> Included and ready to use.</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-700 pt-4 mb-6">
+                        <p class="text-xs text-gray-500 italic">"Only interested in certain parts? Feel free to send a DM to arrange individual system purchases."</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Play Demo Button -->
+                        <a href="https://www.roblox.com/es/games/102037299036175/Platmformer-Game" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg font-semibold transition">
+                            <i class="fa-solid fa-gamepad"></i> Play Demo
+                        </a>
+
+                        <!-- Discord Contact Box -->
+                        <div class="bg-indigo-900/30 border border-indigo-500/30 rounded-lg p-4 text-center backdrop-blur-sm">
+                            <p class="text-xs text-indigo-300 mb-2 uppercase font-bold tracking-wider">To Purchase, DM on Discord</p>
+                            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6 font-mono text-white text-sm">
+                                <div class="flex items-center justify-center gap-2 bg-indigo-500/20 px-3 py-1 rounded hover:bg-indigo-500/30 transition cursor-pointer select-all" title="Copy username">
+                                    <i class="fa-brands fa-discord text-indigo-400"></i> 
+                                    <span>dr_waltz</span>
+                                </div>
+                                <div class="flex items-center justify-center gap-2 bg-indigo-500/20 px-3 py-1 rounded hover:bg-indigo-500/30 transition cursor-pointer select-all" title="Copy username">
+                                    <i class="fa-brands fa-discord text-indigo-400"></i> 
+                                    <span>st_cito</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCT 2: 40 EURO GAME -->
+            <div id="mechanics" class="glass-card rounded-2xl p-1 flex flex-col h-full hover:border-roblox-purple/50 transition duration-300">
+                <div class="bg-gray-800 rounded-xl overflow-hidden relative group h-64 bg-black">
+                    <!-- Carousel Video Frame -->
+                    <iframe id="mechanics-video" class="w-full h-full object-cover transition-opacity duration-300" 
+                            src="https://streamable.com/e/zqroic" 
+                            frameborder="0" 
+                            width="100%" 
+                            height="100%" 
+                            allowfullscreen>
+                    </iframe>
+                    
+                    <!-- Navigation Arrows (Visible on Hover) -->
+                    <button onclick="changeVideo(-1)" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-roblox-purple text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 backdrop-blur-sm border border-white/10 z-10 cursor-pointer">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button onclick="changeVideo(1)" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-roblox-purple text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 backdrop-blur-sm border border-white/10 z-10 cursor-pointer">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Dots Indicators -->
+                    <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-2 z-10 pointer-events-auto">
+                        <button onclick="setVideo(0)" id="dot-0" class="w-2.5 h-2.5 rounded-full bg-white transition-all duration-300 hover:scale-125 shadow shadow-black/50"></button>
+                        <button onclick="setVideo(1)" id="dot-1" class="w-2.5 h-2.5 rounded-full bg-white/40 transition-all duration-300 hover:scale-125 hover:bg-white/80 shadow shadow-black/50"></button>
+                    </div>
+                </div>
+                
+                <div class="p-8 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Pro Mechanics Suite</h3>
+                            <p class="text-roblox-purple text-sm font-semibold mt-1">Advanced Physics & Tools</p>
+                        </div>
+                        <div class="bg-gray-700 px-4 py-2 rounded-lg">
+                            <span class="text-2xl font-bold text-white">€55</span>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-400 mb-6 text-sm">
+                        Robust and flexible mechanics ready for your next big project. Includes a custom object creator requiring NO code changes!
+                    </p>
+
+                    <div class="space-y-3 mb-8 flex-1">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-purple-400 mt-1"></i>
+                            <span class="text-gray-300 text-sm"><strong>Robust Grass System:</strong> Customize color, size, density without performance loss.</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-purple-400 mt-1"></i>
+                            <span class="text-gray-300 text-sm"><strong>Intuitive Cinematic System:</strong> Design action sequences easily.</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-purple-400 mt-1"></i>
+                            <span class="text-gray-300 text-sm"><strong>No-Code Object Creator:</strong> Generate Bombs, Moving Platforms, and Mines with custom parameters.</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-purple-400 mt-1"></i>
+                            <span class="text-gray-300 text-sm"><strong>4 Unique Maps:</strong> Ready-to-use maps showcasing distinct mechanics.</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-purple-400 mt-1"></i>
+                            <span class="text-gray-300 text-sm"><strong>Physics Movement:</strong> Practical, memory-efficient physics simulation.</span>
+                        </div>
+                    </div>
+
+                    <!-- ANALYTICS SECTION (New Addition based on uploaded image) -->
+                    <div class="mb-6 bg-gray-900 rounded-lg border border-gray-700 p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Real Ad Performance Stats</h4>
+                            <span class="bg-green-500/20 text-green-400 text-xs px-2 py-0.5 rounded border border-green-500/30">Verified</span>
+                        </div>
+                        
+                        <!-- Main Stats Row -->
+                        <div class="grid grid-cols-3 gap-2 mb-3">
+                            <div class="bg-gray-800 p-2 rounded text-center">
+                                <div class="text-xs text-gray-500">Impressions</div>
+                                <div class="text-lg font-bold text-white">248.9k</div>
+                            </div>
+                            <div class="bg-gray-800 p-2 rounded text-center">
+                                <div class="text-xs text-gray-500">CTR</div>
+                                <div class="text-lg font-bold text-roblox-accent">1.91%</div>
+                            </div>
+                            <div class="bg-gray-800 p-2 rounded text-center">
+                                <div class="text-xs text-gray-500">Plays</div>
+                                <div class="text-lg font-bold text-white">1.4k</div>
+                            </div>
+                        </div>
+
+                        <!-- Detailed Table View -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs text-left text-gray-400">
+                                <thead class="text-gray-500 border-b border-gray-700">
+                                    <tr>
+                                        <th class="pb-1 font-medium">Campaign</th>
+                                        <th class="pb-1 font-medium text-right">Spent</th>
+                                        <th class="pb-1 font-medium text-right">Clicks</th>
+                                        <th class="pb-1 font-medium text-right">CPP</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-800/50">
+                                        <td class="py-1 text-white"><i class="fa-solid fa-chart-line mr-1 text-gray-600"></i> Bomb Survival</td>
+                                        <td class="py-1 text-right">16.05</td>
+                                        <td class="py-1 text-right">4,744</td>
+                                        <td class="py-1 text-right font-mono text-roblox-accent">0.011</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto">
+                         <!-- Discord Contact Box -->
+                         <div class="bg-roblox-purple/20 border border-roblox-purple/30 rounded-lg p-4 text-center backdrop-blur-sm">
+                            <p class="text-xs text-purple-300 mb-2 uppercase font-bold tracking-wider">To Purchase, DM on Discord</p>
+                            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6 font-mono text-white text-sm">
+                                <div class="flex items-center justify-center gap-2 bg-purple-500/20 px-3 py-1 rounded hover:bg-purple-500/30 transition cursor-pointer select-all">
+                                    <i class="fa-brands fa-discord text-purple-400"></i> 
+                                    <span>dr_waltz</span>
+                                </div>
+                                <div class="flex items-center justify-center gap-2 bg-purple-500/20 px-3 py-1 rounded hover:bg-purple-500/30 transition cursor-pointer select-all">
+                                    <i class="fa-brands fa-discord text-purple-400"></i> 
+                                    <span>st_cito</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- BUNDLE OFFER SECTION -->
+    <div id="bundle" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <div class="relative rounded-3xl overflow-hidden">
+            <!-- Gradient BG -->
+            <div class="absolute inset-0 bg-gradient-to-r from-roblox-accent via-blue-600 to-roblox-purple opacity-90"></div>
+            
+            <div class="relative p-10 sm:p-16 text-center text-white">
+                <div class="absolute top-4 right-4 bg-yellow-400 text-black text-xs font-black px-3 py-1 rounded uppercase transform rotate-12 shadow-lg">
+                    Best Value
+                </div>
+
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">The Ultimate Developer Bundle</h2>
+                <p class="text-lg md:text-xl opacity-90 mb-8 max-w-2xl mx-auto">
+                    Get both the <strong>Agile Platformer System</strong> and the <strong>Pro Mechanics Suite</strong> together and start building your dream game instantly.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">
+                    <div class="text-gray-300 line-through text-2xl">€100.00</div>
+                    <div class="text-6xl font-extrabold">€75.00</div>
+                    <div class="bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-bold">
+                        Save €25
+                    </div>
+                </div>
+
+                <div class="bg-black/40 backdrop-blur-md rounded-2xl p-6 inline-block border border-white/10">
+                    <p class="text-sm text-gray-200 mb-3 uppercase font-bold tracking-wider">Contact to Purchase Bundle</p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 font-mono text-lg font-bold">
+                        <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20 transition cursor-pointer select-all">
+                            <i class="fa-brands fa-discord"></i> dr_waltz
+                        </div>
+                        <div class="hidden sm:block text-white/30">|</div>
+                        <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20 transition cursor-pointer select-all">
+                            <i class="fa-brands fa-discord"></i> st_cito
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="mt-6 text-sm opacity-75">Instant delivery via email after contact</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 bg-gray-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex justify-center gap-2 mb-4">
+                <i class="fa-solid fa-cube text-roblox-accent text-2xl"></i>
+                <span class="font-bold text-xl tracking-wide text-white">RBX<span class="text-roblox-purple">Assets</span></span>
+            </div>
+            <p class="text-gray-500 text-sm mb-6">
+                Premium assets for serious Roblox developers.
+            </p>
+            <div class="flex justify-center space-x-6 text-gray-400 mb-8">
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-discord"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+            <p class="text-gray-600 text-xs">
+                &copy; 2023 RBXAssets. Not affiliated with Roblox Corporation.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Simple Mock Checkout Modal script -->
+    <script>
+        function openCheckout(productName, price) {
+            // In a real scenario, this would open Stripe/PayPal or a contact form
+            const message = `Interested in buying: ${productName} for €${price}. \n\n(This is a demo site. DM the seller to proceed!)`;
+            alert(message);
+        }
+
+        // Video Carousel Logic
+        const videos = [
+            "https://streamable.com/e/zqroic",
+            "https://streamable.com/e/h6qim2"
+        ];
+        let currentVideoIndex = 0;
+
+        function updateCarousel() {
+            const iframe = document.getElementById('mechanics-video');
+            const dot0 = document.getElementById('dot-0');
+            const dot1 = document.getElementById('dot-1');
+            
+            // Update Source
+            iframe.src = videos[currentVideoIndex];
+            
+            // Update Dots styling
+            if(currentVideoIndex === 0) {
+                dot0.className = "w-2.5 h-2.5 rounded-full bg-white transition-all duration-300 hover:scale-125 shadow shadow-black/50";
+                dot1.className = "w-2.5 h-2.5 rounded-full bg-white/40 transition-all duration-300 hover:scale-125 hover:bg-white/80 shadow shadow-black/50";
+            } else {
+                dot0.className = "w-2.5 h-2.5 rounded-full bg-white/40 transition-all duration-300 hover:scale-125 hover:bg-white/80 shadow shadow-black/50";
+                dot1.className = "w-2.5 h-2.5 rounded-full bg-white transition-all duration-300 hover:scale-125 shadow shadow-black/50";
+            }
+        }
+
+        function changeVideo(direction) {
+            currentVideoIndex = (currentVideoIndex + direction + videos.length) % videos.length;
+            updateCarousel();
+        }
+
+        function setVideo(index) {
+            currentVideoIndex = index;
+            updateCarousel();
+        }
+    </script>
+</body>
+</html>
