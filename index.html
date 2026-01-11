@@ -123,12 +123,12 @@
             height: 20px;
         }
 
-        /* --- BOTÓN TOGGLE MÚSICA (NUEVO) --- */
-        #music-toggle-btn {
+        /* --- BOTÓN DE AUDIO (SIMPLE) --- */
+        #audio-control-btn {
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 5001; /* Encima del contenedor de música */
+            z-index: 5001;
             width: 40px;
             height: 40px;
             background: #2a0a0a;
@@ -145,66 +145,10 @@
             opacity: 0; /* Oculto hasta login */
         }
 
-        #music-toggle-btn:hover {
+        #audio-control-btn:hover {
             background: #4a0404;
             transform: scale(1.1);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-        }
-
-        /* --- REPRODUCTOR DE MÚSICA (ORBE) --- */
-        #music-container {
-            position: fixed;
-            top: 70px; /* Debajo del botón */
-            right: 20px;
-            width: 200px;
-            z-index: 5000;
-            opacity: 0; /* Oculto inicialmente */
-            pointer-events: none; /* No clickable cuando oculto */
-            transform: translateY(-20px);
-            transition: all 0.5s ease;
-            background: rgba(20, 0, 0, 0.8);
-            border: 2px double var(--gold);
-            padding: 5px;
-            border-radius: 5px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.8);
-            text-align: center;
-        }
-
-        /* Clase para mostrar el reproductor */
-        #music-container.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-        #player {
-            width: 100%;
-            height: 112px;
-            border-radius: 2px;
-            border: 1px solid #2c1810;
-        }
-
-        .music-controls {
-            margin-top: 5px;
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .music-btn {
-            background: #2a0a0a;
-            color: var(--gold);
-            border: 1px solid #5d4037;
-            font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            cursor: pointer;
-            padding: 2px 8px;
-            text-transform: uppercase;
-        }
-        
-        .music-btn:hover {
-            background: #4a0404;
-            border-color: var(--gold);
         }
 
         /* --- CONTENIDO DEL LIBRO --- */
@@ -261,7 +205,7 @@
         }
 
         /* --- ESTILOS DE LA TAPA --- */
-        #p1 { z-index: 11; }
+        #p1 { z-index: 12; }
         
         #p1 .front {
             background-color: var(--cover-color);
@@ -338,14 +282,15 @@
         }
 
         /* Z-Index descendente */
-        #p2 { z-index: 10; } /* ÍNDICE */
-        #p3 { z-index: 9; }
-        #p4 { z-index: 8; }
-        #p5 { z-index: 7; }
-        #p6 { z-index: 6; }
-        #p7 { z-index: 5; }
-        #p8 { z-index: 4; } /* WALTER */
-        #p9 { z-index: 3; } /* ST */
+        #p2 { z-index: 11; } /* ÍNDICE */
+        #p3 { z-index: 10; }
+        #p4 { z-index: 9; }
+        #p5 { z-index: 8; }
+        #p6 { z-index: 7; }
+        #p7 { z-index: 6; }
+        #p8 { z-index: 5; } /* WALTER */
+        #p9 { z-index: 4; } /* ST PARTE 1 */
+        #p10 { z-index: 3; } /* ST PARTE 2 */
         
         h2 {
             font-family: 'Cinzel', serif;
@@ -357,10 +302,10 @@
         }
 
         .verse {
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.5;
             text-align: justify;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .drop-cap {
@@ -502,8 +447,6 @@
         }
 
     </style>
-    <!-- API DE YOUTUBE -->
-    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 
@@ -521,17 +464,12 @@
         </div>
     </div>
 
-    <!-- BOTÓN DESPLEGABLE DE MÚSICA -->
-    <button id="music-toggle-btn" onclick="toggleMusicPlayer()">♫</button>
-
-    <!-- REPRODUCTOR DE MÚSICA -->
-    <div id="music-container">
-        <!-- El div donde se inyectará el iframe de YouTube -->
-        <div id="player"></div>
-        <div class="music-controls">
-            <button class="music-btn" onclick="toggleMute()">Silenciar / Activar</button>
-        </div>
-    </div>
+    <!-- AUDIO PLAYERS -->
+    <audio id="audioPlayer" loop></audio>
+    <audio id="pageTurnAudio" src="https://res.cloudinary.com/dgycaxlug/video/upload/v1768096437/Turning_book_page_sound_effect_Pasando_p%C3%A1gina_de_libro_efecto_de_sonido_hub3rj.mp3"></audio>
+    
+    <!-- BOTÓN CONTROL AUDIO -->
+    <button id="audio-control-btn" onclick="toggleAudioState()">🔊</button>
 
     <!-- ESCENA DEL LIBRO -->
     <div class="book-scene" id="bookScene">
@@ -671,22 +609,33 @@
                 <div class="back"></div>
             </div>
 
-            <!-- SECCIÓN 3: ESCRITURAS DE ST (NUEVO TEXTO) -->
+            <!-- SECCIÓN 3: ESCRITURAS DE ST (NUEVO TEXTO EXPANDIDO - PARTE 1) -->
             
-            <!-- PÁGINA 9 (ST Intro) -->
+            <!-- PÁGINA 9 (ST Intro Parte 1) -->
             <div class="page" id="p9">
                 <div class="front paper-texture">
-                    <h2>Las Escrituras de ST</h2>
-                    <h3 style="font-family:'Cinzel'; text-align:center; font-size:1rem; margin-top:10px; color:#8b0000;">I. La Parábola del Pastel Prohibido</h3>
+                    <h3 style="font-family:'Cinzel'; text-align:center; font-size:1.1rem; color:#8b0000; border-bottom:1px solid #8b0000; padding-bottom:5px;">I. La Parábola del Pastel Prohibido (I)</h3>
                     
-                    <p class="verse">
-                        <span class="drop-cap">A</span>conteció en el tercer día del mes duodécimo, que tras el rechazo de las Damas de la Flor, la Hermandad Verdadera se congregó en la morada de Walter.
+                    <p class="verse" style="font-size: 0.95rem;">
+                        <span class="drop-cap">A</span>conteció en el tercer día del mes duodécimo, bajo el signo del invierno austral, que tras el amargo rechazo de las Damas de la Flor, la Hermandad Verdadera —conocida entre los sabios como la SoloGang— se congregó en el santuario de Walter. Juan, Isaac, y el mismo Walter aguardaban, mas la incertidumbre nublaba sus copas.
                     </p>
-                    <p class="verse">
-                        <span class="verse-number">13.</span> Y he aquí que llegó una invitada inesperada, llamada Loop. Entonces ST, en su sabiduría, bebió del cáliz del sacrificio para ganar su favor y abrir el camino a su hermano.
+                    <p class="verse" style="font-size: 0.95rem;">
+                        <span class="verse-number">13.</span> Y he aquí que las puertas se abrieron para una invitada inesperada, llamada Loop, cuya presencia era un enigma. Entonces ST, viendo la duda en los ojos de sus hermanos, comprendió que el destino exigía un sacrificio de sangre y vino.
                     </p>
-                    <p class="verse">
-                        <span class="verse-number">14.</span> Así, con precisión divina, Walter probó la dulzura del pastel; y ST, el Soñador Inmortal, da fe de que la misión fue consumada en gloria.
+                </div>
+                <div class="back"></div>
+            </div>
+
+            <!-- PÁGINA 10 (ST Intro Parte 2) -->
+            <div class="page" id="p10">
+                <div class="front paper-texture">
+                    <h3 style="font-family:'Cinzel'; text-align:center; font-size:1.1rem; color:#8b0000; border-bottom:1px solid #8b0000; padding-bottom:5px;">I. La Parábola del Pastel Prohibido (II)</h3>
+                    
+                    <p class="verse" style="font-size: 0.95rem;">
+                        <span class="verse-number">14.</span> Así pues, ST bebió del cáliz del vértigo hasta embriagar su espíritu, despojándose de la vergüenza para ganar el favor de la recién llegada. Con lengua desatada y astucia de serpiente, forjó una alianza en el fuego de la embriaguez, abriendo el sendero para su hermano.
+                    </p>
+                    <p class="verse" style="font-size: 0.95rem;">
+                        <span class="verse-number">15.</span> Y gracias a esta ofrenda, Walter pudo probar la dulzura del pastel prohibido sin estorbo alguno. ST, ahora el Soñador Inmortal, da testimonio eterno de que la misión fue consumada en gloria, y que el sacrificio de uno fue la victoria de todos.
                     </p>
                 </div>
                 <!-- Última página, reverso -->
@@ -707,68 +656,81 @@
     </div>
 
     <script>
-        // --- API DE YOUTUBE ---
-        var player;
-        var currentVideoId = "";
+        // --- LOGICA DE AUDIO ---
+        const audioPlayer = document.getElementById('audioPlayer');
+        const pageTurnAudio = document.getElementById('pageTurnAudio');
+        const audioBtn = document.getElementById('audio-control-btn');
+        
+        // Volumen bajo
+        audioPlayer.volume = 0.2;
 
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '100%',
-                width: '100%',
-                playerVars: {
-                    'controls': 1,
-                    'autoplay': 0, 
-                    'loop': 1
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
+        // URLs de Audio
+        const walterMusic = "https://res.cloudinary.com/dgycaxlug/video/upload/v1768096299/Gymnop%C3%A9die_No.1_eyoohq.mp3";
+        const stMusic = "https://res.cloudinary.com/dgycaxlug/video/upload/v1768096310/Una_melodia_muy_simple_pero_muy_triste_Synthesia_o0vrsm.mp3";
+        
+        let isUserMuted = false;
 
-        function onPlayerReady(event) {
-            // Player listo
-        }
-
-        function toggleMute() {
-            if (player && player.isMuted && player.unMute) {
-                if (player.isMuted()) {
-                    player.unMute();
+        function toggleAudioState() {
+            if (audioPlayer.paused) {
+                // Intentar reanudar si hay una pista cargada
+                if (audioPlayer.src && audioPlayer.src !== window.location.href) {
+                    audioPlayer.play();
+                    audioBtn.innerText = "🔊";
+                    isUserMuted = false;
                 } else {
-                    player.mute();
+                    // Si no hay pista, forzar chequeo (puede que estemos en una página con música)
+                    isUserMuted = false;
+                    checkMusic();
+                    if(audioPlayer.paused) audioBtn.innerText = "🔇"; // Si sigue pausado es que no hay música aquí
+                    else audioBtn.innerText = "🔊";
                 }
+            } else {
+                audioPlayer.pause();
+                audioBtn.innerText = "🔇";
+                isUserMuted = true;
             }
         }
 
-        function toggleMusicPlayer() {
-            const container = document.getElementById("music-container");
-            container.classList.toggle("visible");
+        function playTurnSound() {
+            // Reproducir sonido de hoja al pasar página
+            pageTurnAudio.currentTime = 0;
+            pageTurnAudio.play().catch(e => {}); // Ignorar error si no hay interacción
         }
 
         function checkMusic() {
-            if (!player || !player.loadVideoById) return;
+            // Lógica de reproducción automática basada en la página
+            let targetSrc = "";
 
             if (currentLocation === 8) {
-                // Escrituras de Walter
-                if (currentVideoId !== 'OHTapZtu9kU') {
-                    currentVideoId = 'OHTapZtu9kU';
-                    player.loadVideoById(currentVideoId);
+                targetSrc = walterMusic;
+            } else if (currentLocation === 9 || currentLocation === 10) {
+                targetSrc = stMusic;
+            }
+
+            if (targetSrc) {
+                // Si la fuente cambia, cargar y reproducir
+                if (audioPlayer.getAttribute('src') !== targetSrc) {
+                    audioPlayer.src = targetSrc;
+                    audioPlayer.load();
+                    if (!isUserMuted) {
+                        audioPlayer.play().catch(e => console.log("Autoplay bloqueado hasta interacción", e));
+                        audioBtn.innerText = "🔊";
+                    }
                 } else {
-                    if(player.getPlayerState() !== 1) player.playVideo();
-                }
-            } else if (currentLocation === 9) {
-                // Escrituras de ST
-                if (currentVideoId !== 'vWNPmEKGXc0') {
-                    currentVideoId = 'vWNPmEKGXc0';
-                    player.loadVideoById(currentVideoId);
-                } else {
-                    if(player.getPlayerState() !== 1) player.playVideo();
+                    // Si es la misma fuente y no está muteado, asegurar play
+                    if (audioPlayer.paused && !isUserMuted) {
+                        audioPlayer.play();
+                        audioBtn.innerText = "🔊";
+                    }
                 }
             } else {
-                // Silencio para el resto (Portada, Índice, Frases)
-                if (currentVideoId !== '') {
-                    player.pauseVideo();
-                    currentVideoId = ''; 
+                // Silencio en otras páginas
+                if (!audioPlayer.paused) {
+                    audioPlayer.pause();
+                }
+                // Limpiar src para que no siga cargando, pero guardamos estado
+                if(audioPlayer.getAttribute('src')) {
+                    audioPlayer.removeAttribute('src');
                 }
             }
         }
@@ -780,7 +742,7 @@
             const overlay = document.getElementById("login-overlay");
             const bookScene = document.getElementById("bookScene");
             const controls = document.getElementById("controls");
-            const musicToggleBtn = document.getElementById("music-toggle-btn");
+            const musicToggleBtn = document.getElementById("audio-control-btn");
 
             const encodedInput = btoa(input);
             const part1 = "MjQ0";
@@ -795,8 +757,10 @@
                     bookScene.style.opacity = "1";
                     bookScene.style.transform = "scale(1)";
                     controls.style.opacity = "1";
-                    // MOSTRAR BOTÓN DE MÚSICA
                     musicToggleBtn.style.opacity = "1";
+                    
+                    // INTENTO DE UNLOCK DE AUDIO AL CLICK
+                    checkMusic(); 
                 }, 1500);
             } else {
                 errorMsg.style.opacity = "1";
@@ -816,10 +780,11 @@
 
         // --- LÓGICA DEL LIBRO ---
         let currentLocation = 1;
-        const numOfPages = 9; // Aumentado a 9 páginas
+        const numOfPages = 10; // Aumentado a 10 páginas
         const maxLocation = numOfPages + 1;
         let isAnimating = false; // FLAG DE SEGURIDAD
         let jumpInterval = null; // CONTROL DE SALTOS
+        let autoRead = false; // FLAG DE LECTURA AUTOMATICA
 
         const prevBtn = document.getElementById("prevBtn");
         const nextBtn = document.getElementById("nextBtn");
@@ -870,12 +835,18 @@
 
         function toggleReading() {
             if (synth.speaking) {
-                synth.cancel();
-                readBtn.innerText = "Leer Página";
-                isSpeaking = false;
+                // Parada manual
+                autoRead = false;
+                stopSpeaking();
                 return;
             }
 
+            // Inicio manual
+            autoRead = true;
+            readCurrentPage();
+        }
+
+        function readCurrentPage() {
             let textToRead = "";
             const pageEl = pages[currentLocation];
 
@@ -884,15 +855,16 @@
             } else if (currentLocation === 2) {
                 textToRead = "Tabla de contenidos. Frases del Insano. Escrituras de Walter. Escrituras de ST.";
             } else if (currentLocation >= 3 && currentLocation < 8) {
-                // Lectura estándar de versículos
                 const h2 = pageEl.querySelector('h2') ? pageEl.querySelector('h2').innerText : "";
                 const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
                 textToRead = h2 + ". " + verses;
             } else if (currentLocation === 8) {
                 textToRead = "Las Escrituras de Walter. He aquí las visiones de Walter, aquel que caminó entre los mundos.";
             } else if (currentLocation === 9) {
-                textToRead = "Las Escrituras de ST. La Parábola del Pastel Prohibido. Aconteció en el tercer día del mes duodécimo, que tras el rechazo de las Damas de la Flor, la Hermandad Verdadera se congregó en la morada de Walter. Y he aquí que llegó una invitada inesperada, llamada Loop. Entonces ST, en su sabiduría, bebió del cáliz del sacrificio para ganar su favor y abrir el camino a su hermano. Así, con precisión divina, Walter probó la dulzura del pastel; y ST, el Soñador Inmortal, da fe de que la misión fue consumada en gloria.";
+                textToRead = "Las Escrituras de ST. Parte Uno. Aconteció en el tercer día del mes duodécimo, bajo el signo del invierno austral, que tras el amargo rechazo de las Damas de la Flor, la Hermandad Verdadera —conocida entre los sabios como la SoloGang— se congregó en el santuario de Walter. Juan, Isaac, y el mismo Walter aguardaban, mas la incertidumbre nublaba sus copas. Y he aquí que las puertas se abrieron para una invitada inesperada, llamada Loop, cuya presencia era un enigma. Entonces ST, viendo la duda en los ojos de sus hermanos, comprendió que el destino exigía un sacrificio de sangre y vino.";
             } else if (currentLocation === 10) {
+                textToRead = "Las Escrituras de ST. Parte Dos. Así pues, ST bebió del cáliz del vértigo hasta embriagar su espíritu, despojándose de la vergüenza para ganar el favor de la recién llegada. Con lengua desatada y astucia de serpiente, forjó una alianza en el fuego de la embriaguez, abriendo el sendero para su hermano. Y gracias a esta ofrenda, Walter pudo probar la dulzura del pastel prohibido sin estorbo alguno. ST, ahora el Soñador Inmortal, da testimonio eterno de que la misión fue consumada en gloria, y que el sacrificio de uno fue la victoria de todos.";
+            } else if (currentLocation === 11) {
                 textToRead = "Fin del libro.";
             }
 
@@ -902,9 +874,21 @@
                 utterance.rate = 0.8;
                 utterance.pitch = 0.8;
                 
+                // EVENTO FIN DE LECTURA (AUTO-ADVANCE)
                 utterance.onend = function() {
-                    readBtn.innerText = "Leer Página";
-                    isSpeaking = false;
+                    if (autoRead && currentLocation < numOfPages) {
+                        // Pasar página
+                        goNext();
+                        // Esperar animación y leer siguiente
+                        setTimeout(() => {
+                            if (autoRead) readCurrentPage();
+                        }, 1300);
+                    } else {
+                        // Fin natural
+                        readBtn.innerText = "Leer Página";
+                        isSpeaking = false;
+                        autoRead = false;
+                    }
                 };
 
                 synth.speak(utterance);
@@ -924,13 +908,29 @@
         function goNext(fastMode = false) {
             if (!fastMode) clearInterval(jumpInterval); // Detener auto-salto si el usuario interrumpe
 
+            // Si el usuario cambia manualmente, paramos la lectura automática
+            // EXCEPCIÓN: Si isSpeaking y autoRead son true, asumimos que es el flujo automático
+            // Si el evento viene de un click (usuario), deberíamos parar autoRead.
+            // Para simplificar, si es fastMode es auto, si no, es manual.
+            if (!fastMode && !isSpeaking) autoRead = false; 
+            // Nota: Si el TTS está hablando y cambiamos manual, el stopSpeaking corta el audio y el onend no se dispara igual.
+
             // BLOQUEO ANTI-SPAM (Solo afecta clic manual, no fastMode)
             if (isAnimating && !fastMode) return;
             if (!fastMode) isAnimating = true;
 
-            stopSpeaking();
+            // Solo detener voz si NO es un avance automático de lectura
+            if (!autoRead || (autoRead && !isSpeaking && !fastMode)) {
+                 stopSpeaking();
+            } else {
+                // Si es autoRead, stopSpeaking se llamó antes en el onend? No, onend llama a goNext.
+                // Aquí solo necesitamos asegurarnos que no se cancele el flujo futuro.
+            }
             
             if (currentLocation < maxLocation) {
+                // SONIDO
+                if (!fastMode) playTurnSound();
+
                 if (currentLocation === 1) openBook();
                 
                 const currPage = pages[currentLocation];
@@ -959,13 +959,17 @@
         function goPrev(fastMode = false) {
             if (!fastMode) clearInterval(jumpInterval); // Detener auto-salto si el usuario interrumpe
 
+            autoRead = false; // Al volver atrás manual, cancelamos auto lectura
+            stopSpeaking();
+
             // BLOQUEO ANTI-SPAM
             if (isAnimating && !fastMode) return;
             if (!fastMode) isAnimating = true;
-
-            stopSpeaking();
             
             if (currentLocation > 1) {
+                // SONIDO
+                if (!fastMode) playTurnSound();
+
                 currentLocation--;
                 
                 const prevPage = pages[currentLocation];
