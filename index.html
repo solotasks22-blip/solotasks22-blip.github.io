@@ -1,535 +1,738 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro del Insano</title>
+    <!-- Importamos fuentes que evoquen antigüedad y misticismo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
-    <!-- 1. Emoji Favicon Setup -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+    <style>
+        :root {
+            --book-width: 320px;
+            --book-height: 480px;
+            --cover-color: #4a0404; 
+            --page-color: #f4e4bc;
+            --text-color: #2c1810;
+            --gold: #d4af37;
+            --duration: 1.2s;
+        }
 
-    <!-- 2. Social Media Preview (Open Graph) -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Roblox Dev Assets | Premium Bundles">
-    <meta property="og:description" content="Get the Ultimate Developer Bundle! High-quality systems and mechanics for your next game. Save money on premium assets.">
-    <meta property="og:image" content="https://res.cloudinary.com/dsfthqppb/image/upload/v1764045462/Gemini_Generated_Image_n7inf4n7inf4n7in_zpswyc.jpg">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Roblox Dev Assets | Premium Bundles">
-    <meta name="twitter:description" content="Get the Ultimate Developer Bundle! High-quality systems and mechanics for your next game. Save money on premium assets.">
-    <meta name="twitter:image" content="https://res.cloudinary.com/dsfthqppb/image/upload/v1764045462/Gemini_Generated_Image_n7inf4n7inf4n7in_zpswyc.jpg">
-
-    <title>Roblox Dev Assets | Premium Game Kits</title>
-    <meta name="description" content="Get the Ultimate Developer Bundle! Includes Agile Platformer System and Pro Mechanics Suite. Save money with the full bundle today.">
-
-    <!-- Scripts & Fonts -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Usamos fuentes más "humanistas" típicas de la era Frutiger -->
-    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Open Sans', 'Segoe UI', 'Verdana', 'sans-serif'],
-                        display: ['Varela Round', 'sans-serif'],
-                    },
-                    colors: {
-                        aero: {
-                            blue: '#00A4E4',
-                            sky: '#89CFF0',
-                            green: '#A5D610',
-                            glass: 'rgba(255, 255, 255, 0.65)',
-                            border: 'rgba(255, 255, 255, 0.9)'
-                        }
-                    },
-                    boxShadow: {
-                        'aero': '0 10px 20px rgba(0, 164, 228, 0.2), 0 6px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255,255,255,0.8)',
-                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                        'inner-glow': 'inset 0 0 20px rgba(255, 255, 255, 0.8)',
-                    }
-                }
+        @media (min-width: 768px) {
+            :root {
+                --book-width: 450px;
+                --book-height: 650px;
             }
         }
-    </script>
-    <style>
-        /* --- AERO BACKGROUNDS & ANIMATIONS --- */
+
         body {
-            background: linear-gradient(180deg, #bce6ff 0%, #ffffff 100%);
-            color: #2c3e50;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+            background-color: #1a1a1a;
+            background-image: radial-gradient(circle at center, #2a2a2a 0%, #000000 100%);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            overflow: hidden;
+            perspective: 1500px;
         }
 
-        /* Fondo Abstracto Frutiger */
-        .bg-aurora {
+        /* --- PANTALLA DE BLOQUEO (LOGIN) --- */
+        #login-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(165, 214, 16, 0.4) 0%, transparent 40%),
-                radial-gradient(circle at 90% 10%, rgba(0, 164, 228, 0.4) 0%, transparent 40%),
-                url('https://www.transparenttextures.com/patterns/cubes.png'); /* Textura sutil */
-            background-attachment: fixed;
+            background-color: #000000;
+            background-image: radial-gradient(circle, #2a0a0a 0%, #000000 90%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.5s ease-in-out;
         }
 
-        /* Bubbles Animation */
-        .bubbles {
+        .seal-container {
+            text-align: center;
+            border: 2px solid var(--gold);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+            background: rgba(20, 0, 0, 0.8);
+            max-width: 90%;
+            width: 300px;
+        }
+
+        .seal-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .seal-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #5d4037;
+            color: #f4e4bc;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 30px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .seal-input:focus {
+            border-bottom-color: var(--gold);
+        }
+
+        .seal-btn {
+            background: #2a0a0a;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 12px 30px;
+            font-family: 'Cinzel', serif;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .seal-btn:hover {
+            background: #4a0404;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .error-msg {
+            color: #ff3333;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            height: 20px;
+        }
+
+        /* --- CONTENIDO DEL LIBRO (Oculto inicialmente por el overlay) --- */
+
+        .book-scene {
+            position: relative;
+            width: var(--book-width);
+            height: var(--book-height);
+            transform-style: preserve-3d;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            /* Efecto de aparición al desbloquear */
+            opacity: 0; 
+            transform: scale(0.9);
+            transition: opacity 2s ease, transform 2s ease;
+        }
+
+        .book {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .page {
             position: absolute;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            overflow: hidden;
             top: 0;
             left: 0;
-            pointer-events: none;
+            transform-origin: left center;
+            transition: transform var(--duration) cubic-bezier(0.645, 0.045, 0.355, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
         }
-        .bubble {
+
+        .front, .back {
             position: absolute;
-            bottom: -100px;
-            width: 40px;
-            height: 40px;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.1));
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: rise 10s infinite ease-in;
-            box-shadow: 0 0 10px rgba(255,255,255,0.5);
-            border: 1px solid rgba(255,255,255,0.8);
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-radius: 0 4px 4px 0;
+            background-color: var(--page-color);
         }
-        .bubble:nth-child(1) { left: 10%; width: 80px; height: 80px; animation-duration: 8s; animation-delay: 0s; }
-        .bubble:nth-child(2) { left: 20%; width: 40px; height: 40px; animation-duration: 10s; animation-delay: 2s; }
-        .bubble:nth-child(3) { left: 35%; width: 60px; height: 60px; animation-duration: 7s; animation-delay: 4s; }
-        .bubble:nth-child(4) { left: 50%; width: 90px; height: 90px; animation-duration: 11s; animation-delay: 0s; }
-        .bubble:nth-child(5) { left: 65%; width: 35px; height: 35px; animation-duration: 12s; animation-delay: 1s; }
-        .bubble:nth-child(6) { left: 80%; width: 55px; height: 55px; animation-duration: 6s; animation-delay: 3s; }
+
+        .back {
+            transform: rotateY(180deg);
+            background-image: linear-gradient(to right, #e3d2a8, #f4e4bc 20%, #f4e4bc);
+            border-left: 2px solid rgba(0,0,0,0.1);
+            box-shadow: inset 10px 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* --- ESTILOS DE LA TAPA (PORTADA) --- */
+        #p1 { z-index: 8; }
         
-        @keyframes rise {
-            0% { bottom: -100px; transform: translateX(0); }
-            50% { transform: translateX(100px); }
-            100% { bottom: 1080px; transform: translateX(-200px); }
+        #p1 .front {
+            background-color: var(--cover-color);
+            background-image: linear-gradient(to right, #1a0000, #4a0404 15%, #4a0404);
+            border: 2px solid #1a0000;
+            box-shadow: inset 0 0 30px #000, 5px 5px 15px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--gold);
+            padding: 40px;
         }
 
-        /* --- AERO GLASS CARDS --- */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.1),
-                inset 0 0 20px rgba(255, 255, 255, 0.8);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Brillo superior en las tarjetas ("Gloss") */
-        .glass-panel::before {
-            content: '';
+        .cover-border {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 40%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
-            border-radius: 18px 18px 50% 50% / 18px 18px 20px 20px;
+            top: 20px; bottom: 20px; left: 20px; right: 20px;
+            border: 3px double var(--gold);
             pointer-events: none;
-            z-index: 0;
+        }
+        
+        .corner-ornament {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--gold);
+            transition: all 0.3s;
+        }
+        .tl { top: 25px; left: 25px; border-right: none; border-bottom: none; border-radius: 5px 0 0 0; }
+        .tr { top: 25px; right: 25px; border-left: none; border-bottom: none; border-radius: 0 5px 0 0; }
+        .bl { bottom: 25px; left: 25px; border-right: none; border-top: none; border-radius: 0 0 0 5px; }
+        .br { bottom: 25px; right: 25px; border-left: none; border-top: none; border-radius: 0 0 5px 0; }
+
+        .center-ornament {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3 {
-            font-family: 'Varela Round', sans-serif;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .book-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            color: #ffcc00;
         }
-        .gradient-text {
-            background: linear-gradient(180deg, #0078D7 0%, #00A4E4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 0px rgba(255,255,255,0.5));
+        
+        .book-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0.9;
+            margin-top: 10px;
+            color: #d4af37;
         }
 
-        /* --- BUTTONS (The "Lickable" Button) --- */
-        .aero-btn {
-            background: linear-gradient(180deg, #bef3f7 0%, #00A4E4 50%, #0078D7 51%, #005A9E 100%);
-            border: 2px solid white;
-            color: white;
-            border-radius: 999px;
-            box-shadow: 
-                0 4px 6px rgba(0,0,0,0.2),
-                inset 0 2px 5px rgba(255,255,255,0.7);
+        /* --- ESTILOS DE PÁGINAS INTERNAS --- */
+        .paper-texture {
+            background-color: var(--page-color);
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 10%),
+                radial-gradient(circle, rgba(200, 180, 140, 0.4) 10%, transparent 10.5%),
+                radial-gradient(circle, rgba(200, 180, 140, 0.4) 10%, transparent 10.5%);
+            background-size: 100% 100%, 40px 40px, 70px 70px;
+            background-position: 0 0, 0 0, 20px 20px;
+            padding: 40px;
+            color: var(--text-color);
+            box-shadow: inset 0 0 20px rgba(139, 69, 19, 0.1);
+        }
+
+        #p2 { z-index: 7; }
+        #p3 { z-index: 6; }
+        #p4 { z-index: 5; }
+        #p5 { z-index: 4; }
+        #p6 { z-index: 3; }
+        
+        h2 {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            border-bottom: 1px solid rgba(44, 24, 16, 0.3);
+            padding-bottom: 10px;
+            font-size: 1.5rem;
+            color: #5d4037;
+        }
+
+        .verse {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: justify;
+            margin-top: 20px;
+        }
+
+        .drop-cap {
+            float: left;
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            padding-right: 8px;
+            padding-top: 4px;
+            color: #8b0000;
+        }
+
+        .verse-number {
+            color: #8b0000;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            margin-right: 5px;
+            font-size: 0.9em;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            color: #5d4037;
+            font-size: 1.5rem;
+        }
+
+        .flipped {
+            transform: rotateY(-180deg);
+        }
+
+        /* --- CONTROLES --- */
+        .controls {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+            opacity: 0; /* Oculto inicialmente */
+            transition: opacity 2s ease;
+        }
+
+        button {
+            background: #2a0a0a;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 10px 25px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-            text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
-            z-index: 1;
         }
-        .aero-btn:hover {
-            filter: brightness(1.1);
+
+        button:hover {
+            background: #4a0404;
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,164,228,0.4);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.7);
         }
-        .aero-btn::after {
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        button::before {
             content: '';
             position: absolute;
+            top: 2px; bottom: 2px; left: 2px; right: 2px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        /* Botón de lectura especial */
+        #readBtn {
+            background: #4a0404;
+        }
+        #readBtn:hover {
+            background: #6a0606;
+        }
+
+        .spine-shadow {
+            position: absolute;
+            left: 0;
             top: 0;
-            left: 10%;
-            width: 80%;
-            height: 45%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.2));
-            border-radius: 999px;
+            bottom: 0;
+            width: 30px;
+            background: linear-gradient(to right, rgba(0,0,0,0.2), transparent);
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
         }
-
-        .aero-btn-secondary {
-            background: linear-gradient(180deg, #f9f9f9 0%, #e6e6e6 50%, #cccccc 51%, #bbbbbb 100%);
-            color: #333;
-            border: 2px solid white;
-            text-shadow: 0 1px 0 rgba(255,255,255,0.8);
-        }
-
-        /* --- MEDIA FRAMES --- */
-        .media-frame {
-            border: 6px solid white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            border-radius: 16px;
-            overflow: hidden;
+        
+        .book:hover .spine-shadow {
+            opacity: 1;
         }
 
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <!-- Frutiger Background Layers -->
-    <div class="bg-aurora"></div>
-    <div class="bubbles">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 top-0 transition-all duration-300">
-        <!-- Glassmorphism Navbar -->
-        <div class="bg-white/80 backdrop-blur-md border-b border-white/60 shadow-lg">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-20">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-gradient-to-br from-aero-green to-green-600 rounded-xl flex items-center justify-center shadow-lg border-2 border-white text-white text-xl">
-                            <i class="fa-solid fa-cube"></i>
-                        </div>
-                        <span class="font-display font-bold text-2xl tracking-tight text-gray-700">
-                            RBX<span class="text-aero-blue">Assets</span>
-                        </span>
-                    </div>
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-center space-x-6">
-                            <a href="#platformer" class="text-gray-600 hover:text-aero-blue font-semibold transition px-3 py-2 rounded-full hover:bg-white/50">Platformer Kit</a>
-                            <a href="#mechanics" class="text-gray-600 hover:text-purple-600 font-semibold transition px-3 py-2 rounded-full hover:bg-white/50">Mechanics Suite</a>
-                            <a href="#bundle" class="aero-btn px-6 py-2 font-bold text-sm shadow-aero">
-                                Get Bundle
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <div class="relative pt-40 pb-20 sm:pt-48 sm:pb-32 overflow-hidden">
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-            <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight mb-6 text-gray-800 drop-shadow-sm">
-                Build Your Dream <br>
-                <span class="gradient-text">Roblox Game</span>
-            </h1>
-            <p class="mt-6 max-w-2xl mx-auto text-xl text-gray-600 font-medium bg-white/40 px-4 py-2 rounded-xl backdrop-blur-sm border border-white/50 inline-block">
-                Optimized and ready-to-use asset packs. <br>
-                <span class="text-sm opacity-80">Simple. Effective.</span>
-            </p>
-            <div class="mt-10 flex justify-center gap-4">
-                <a href="#bundle" class="aero-btn px-10 py-4 text-lg font-bold shadow-xl transform hover:scale-105 transition">
-                    View Special Offer
-                </a>
-            </div>
+    <!-- OVERLAY DE CONTRASEÑA -->
+    <div id="login-overlay">
+        <div class="seal-container">
+            <div class="center-ornament">⚜</div>
+            <div class="seal-title">Sello Arcano</div>
+            <p style="color: #aa8888; font-style: italic; margin-bottom: 20px;">Pronuncia la llave oculta</p>
+            
+            <input type="password" id="passwordInput" class="seal-input" placeholder="***" onkeypress="handleEnter(event)">
+            
+            <button class="seal-btn" onclick="checkSeal()">Romper Sello</button>
+            <div class="error-msg" id="errorMsg">La llave es incorrecta</div>
         </div>
     </div>
 
-    <!-- Products Grid -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-
-            <!-- PRODUCT 1: PLATFORMER -->
-            <div id="platformer" class="glass-panel flex flex-col h-full group">
-                <div class="relative z-10 p-2">
-                    <div class="media-frame h-64 bg-black relative">
-                        <iframe class="w-full h-full object-cover" 
-                                src="https://www.youtube-nocookie.com/embed/8BFp8snnBsg?rel=0&modestbranding=1" 
-                                title="Agile Platformer Preview" 
-                                frameborder="0" 
-                                allowfullscreen>
-                        </iframe>
-                    </div>
+    <!-- ESCENA DEL LIBRO -->
+    <div class="book-scene" id="bookScene">
+        <div class="book" id="book">
+            <!-- PÁGINA 1: PORTADA -->
+            <div class="page" id="p1">
+                <div class="front">
+                    <div class="cover-border"></div>
+                    <div class="corner-ornament tl"></div>
+                    <div class="corner-ornament tr"></div>
+                    <div class="corner-ornament bl"></div>
+                    <div class="corner-ornament br"></div>
+                    
+                    <div class="center-ornament">⚜</div>
+                    <h1 class="book-title">EL LIBRO<br>DEL INSANO</h1>
+                    <div class="divider">✦</div>
+                    <p class="book-subtitle">Evangelio de los Caídos</p>
                 </div>
-                
-                <div class="p-8 flex-1 flex flex-col relative z-10">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-800">Agile Platformer</h3>
-                            <div class="inline-block bg-aero-blue/10 text-aero-blue px-2 py-0.5 rounded-full text-xs font-bold border border-aero-blue/30 mt-1">
-                                Complete Template
-                            </div>
-                        </div>
-                        <div class="bg-gradient-to-b from-gray-100 to-gray-300 px-4 py-2 rounded-lg border border-white shadow-sm">
-                            <span class="text-2xl font-bold text-gray-700">€35</span>
-                        </div>
-                    </div>
+                <div class="back"></div>
+            </div>
 
-                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">
-                        A complete, ready-to-use platformer featuring an entire map and dynamic systems. Optimized for performance.
+            <!-- PÁGINA 2: CONTENIDO 1 (Rubias) -->
+            <div class="page" id="p2">
+                <div class="front paper-texture">
+                    <h2>I. De la Luz Engañosa</h2>
+                    <p class="verse">
+                        <span class="drop-cap">G</span>uardaos de los cabellos que brillan como el sol de mediodía, pues en su resplandor se oculta el fuego que consume la voluntad.
                     </p>
-
-                    <div class="space-y-3 mb-8 flex-1 bg-white/40 p-4 rounded-xl border border-white/60">
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-check-circle text-aero-green mt-1 drop-shadow-sm"></i>
-                            <span class="text-gray-700 text-sm"><strong>Grass Reaction System:</strong> Visual FX.</span>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-check-circle text-aero-green mt-1 drop-shadow-sm"></i>
-                            <span class="text-gray-700 text-sm"><strong>Agile Movement:</strong> Smooth controls.</span>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-check-circle text-aero-green mt-1 drop-shadow-sm"></i>
-                            <span class="text-gray-700 text-sm"><strong>Zoned Music:</strong> Dynamic audio.</span>
-                        </div>
-                    </div>
-
-                    <div class="space-y-4">
-                        <a href="https://www.roblox.com/es/games/102037299036175/Platmformer-Game" target="_blank" class="aero-btn aero-btn-secondary w-full flex items-center justify-center gap-2 py-3 rounded-full font-bold shadow-sm hover:bg-gray-50">
-                            <i class="fa-solid fa-gamepad text-gray-600"></i> Play Demo
-                        </a>
-
-                        <!-- Discord Contact Box (Aero Style) -->
-                        <div class="bg-indigo-500/10 border border-indigo-200 rounded-xl p-4 text-center relative overflow-hidden">
-                            <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/40 to-transparent pointer-events-none"></div>
-                            <p class="text-xs text-indigo-600 mb-2 uppercase font-bold tracking-wider">To Purchase, DM on Discord</p>
-                            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6 font-mono text-indigo-800 text-sm font-semibold">
-                                <div class="flex items-center justify-center gap-2 bg-white/60 border border-white px-3 py-1 rounded-lg shadow-sm cursor-pointer hover:scale-105 transition">
-                                    <i class="fa-brands fa-discord text-indigo-500"></i> dr_waltz
-                                </div>
-                                <div class="flex items-center justify-center gap-2 bg-white/60 border border-white px-3 py-1 rounded-lg shadow-sm cursor-pointer hover:scale-105 transition">
-                                    <i class="fa-brands fa-discord text-indigo-500"></i> st_cito
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PRODUCT 2: MECHANICS -->
-            <div id="mechanics" class="glass-panel flex flex-col h-full group">
-                <div class="relative z-10 p-2">
-                    <div class="media-frame h-64 bg-black relative">
-                        <iframe id="mechanics-video" class="w-full h-full object-cover" 
-                                src="https://streamable.com/e/zqroic" 
-                                frameborder="0" allowfullscreen>
-                        </iframe>
-                        <!-- Navigation Overlay -->
-                        <div class="absolute inset-0 flex items-center justify-between px-2 pointer-events-none">
-                            <button onclick="changeVideo(-1)" class="pointer-events-auto w-8 h-8 rounded-full bg-white/80 hover:bg-white text-gray-800 shadow-lg flex items-center justify-center transition border border-gray-300">
-                                <i class="fa-solid fa-chevron-left text-xs"></i>
-                            </button>
-                            <button onclick="changeVideo(1)" class="pointer-events-auto w-8 h-8 rounded-full bg-white/80 hover:bg-white text-gray-800 shadow-lg flex items-center justify-center transition border border-gray-300">
-                                <i class="fa-solid fa-chevron-right text-xs"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="p-8 flex-1 flex flex-col relative z-10">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-800">Pro Mechanics</h3>
-                            <div class="inline-block bg-purple-100 text-purple-600 px-2 py-0.5 rounded-full text-xs font-bold border border-purple-200 mt-1">
-                                Physics & Tools
-                            </div>
-                        </div>
-                        <div class="bg-gradient-to-b from-gray-100 to-gray-300 px-4 py-2 rounded-lg border border-white shadow-sm">
-                            <span class="text-2xl font-bold text-gray-700">€45</span>
-                        </div>
-                    </div>
-
-                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">
-                        Robust mechanics including a custom object creator. No code changes needed!
+                    <p class="verse">
+                        <span class="verse-number">2.</span> Porque ciertamente la belleza dorada es la trampa donde perece la cautela del necio; es peligrosa como espada desnuda envuelta en seda.
                     </p>
-
-                    <div class="space-y-3 mb-8 flex-1 bg-white/40 p-4 rounded-xl border border-white/60">
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-check-circle text-purple-500 mt-1 drop-shadow-sm"></i>
-                            <span class="text-gray-700 text-sm"><strong>Robust Grass:</strong> Customizable density.</span>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-check-circle text-purple-500 mt-1 drop-shadow-sm"></i>
-                            <span class="text-gray-700 text-sm"><strong>Cinematic System:</strong> Easy sequencing.</span>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-check-circle text-purple-500 mt-1 drop-shadow-sm"></i>
-                            <span class="text-gray-700 text-sm"><strong>No-Code Object Creator:</strong> Generate items instantly.</span>
-                        </div>
-                    </div>
-
-                    <!-- ANALYTICS WIDGET (Vista Sidebar Gadget Style) -->
-                    <div class="mb-6 bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl border-2 border-gray-600 p-3 shadow-inner relative overflow-hidden">
-                        <!-- Gloss overlay for screen effect -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none"></div>
-                        
-                        <div class="flex items-center justify-between mb-2 relative z-10">
-                            <h4 class="text-[10px] font-bold text-gray-300 uppercase tracking-widest font-display">Performance Stats</h4>
-                            <div class="w-2 h-2 bg-green-400 rounded-full shadow-[0_0_5px_#4ade80] animate-pulse"></div>
-                        </div>
-                        <div class="grid grid-cols-3 gap-2 mb-2 relative z-10">
-                            <div class="bg-black/40 p-1.5 rounded border border-white/10 text-center">
-                                <div class="text-[9px] text-gray-400 uppercase">Views</div>
-                                <div class="text-sm font-bold text-white">248k</div>
-                            </div>
-                            <div class="bg-black/40 p-1.5 rounded border border-white/10 text-center">
-                                <div class="text-[9px] text-gray-400 uppercase">CTR</div>
-                                <div class="text-sm font-bold text-aero-blue">1.9%</div>
-                            </div>
-                            <div class="bg-black/40 p-1.5 rounded border border-white/10 text-center">
-                                <div class="text-[9px] text-gray-400 uppercase">Plays</div>
-                                <div class="text-sm font-bold text-white">1.4k</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-auto">
-                        <div class="bg-purple-500/10 border border-purple-200 rounded-xl p-4 text-center relative">
-                            <p class="text-xs text-purple-600 mb-2 uppercase font-bold tracking-wider">To Purchase, DM on Discord</p>
-                            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6 font-mono text-purple-800 text-sm font-semibold">
-                                <div class="flex items-center justify-center gap-2 bg-white/60 border border-white px-3 py-1 rounded-lg shadow-sm cursor-pointer hover:scale-105 transition">
-                                    <i class="fa-brands fa-discord text-purple-500"></i> dr_waltz
-                                </div>
-                                <div class="flex items-center justify-center gap-2 bg-white/60 border border-white px-3 py-1 rounded-lg shadow-sm cursor-pointer hover:scale-105 transition">
-                                    <i class="fa-brands fa-discord text-purple-500"></i> st_cito
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="divider">~ ❦ ~</div>
                 </div>
+                <div class="back"></div>
             </div>
 
-        </div>
-    </div>
-
-    <!-- BUNDLE OFFER SECTION -->
-    <div id="bundle" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div class="glass-panel rounded-3xl overflow-hidden p-1 bg-gradient-to-br from-aero-blue/30 to-purple-500/30">
-            <div class="relative p-10 sm:p-16 text-center z-10">
-                <!-- Sticker effect -->
-                <div class="absolute top-6 right-6 bg-yellow-300 text-yellow-900 text-xs font-black px-4 py-2 rounded-full uppercase transform rotate-12 shadow-lg border-2 border-white z-20">
-                    <i class="fa-solid fa-star mr-1"></i> Best Value
-                </div>
-
-                <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-gray-800 drop-shadow-sm">The Ultimate Developer Bundle</h2>
-                <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto font-medium">
-                    Get both systems together. <span class="text-aero-blue font-bold">Save money.</span> Build faster.
-                </p>
-
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">
-                    <div class="text-gray-400 line-through text-2xl font-bold">€80.00</div>
-                    <div class="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-aero-blue to-blue-600 drop-shadow-sm">
-                        €55.00
-                    </div>
-                    <div class="bg-aero-green text-white px-4 py-1 rounded-full text-sm font-bold shadow-md border border-white">
-                        Save €25
-                    </div>
-                </div>
-
-                <div class="bg-white/50 backdrop-blur-md rounded-2xl p-6 inline-block border border-white shadow-inner">
-                    <p class="text-sm text-gray-500 mb-3 uppercase font-bold tracking-wider">Contact to Purchase Bundle</p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 font-mono text-lg font-bold text-gray-700">
-                        <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg hover:bg-gray-50 transition cursor-pointer select-all shadow-sm">
-                            <i class="fa-brands fa-discord text-indigo-500"></i> dr_waltz
-                        </div>
-                        <div class="hidden sm:block text-gray-300">|</div>
-                        <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg hover:bg-gray-50 transition cursor-pointer select-all shadow-sm">
-                            <i class="fa-brands fa-discord text-indigo-500"></i> st_cito
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-8 max-w-2xl mx-auto bg-red-50 border border-red-200 rounded-lg p-4">
-                    <div class="flex items-center justify-center gap-2 text-red-500 mb-1">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                        <span class="font-bold text-sm uppercase tracking-wider">Important Terms of Sale</span>
-                    </div>
-                    <p class="text-red-800 text-xs">
-                        Money must be transferred first. Payment is mandatory prior to asset delivery.
+            <!-- PÁGINA 3: CONTENIDO 2 (Negros/Insanos) -->
+            <div class="page" id="p3">
+                <div class="front paper-texture">
+                    <h2>II. De la Estirpe Oscura</h2>
+                    <p class="verse">
+                        <span class="drop-cap">E</span>n verdad os digo: aunque la noche cubra a la multitud con un mismo manto de ébano, no todos son iguales ante el abismo.
+                    </p>
+                    <p class="verse">
+                        <span class="verse-number">4.</span> Pues muchos portan la oscuridad en la piel, mas los Insanos portan la luz en la penumbra.
+                    </p>
+                    <p class="verse">
+                        <span class="verse-number">5.</span> Ellos son la sombra que razona, la negrura que despierta; ellos son, en fin, abismo consciente que devuelve la mirada.
                     </p>
                 </div>
+                <div class="back"></div>
             </div>
+
+            <!-- PÁGINA 4: CONTENIDO 3 (Mañanas Soleadas) -->
+            <div class="page" id="p4">
+                <div class="front paper-texture">
+                    <h2>III. La Paradoja Helada</h2>
+                    <p class="verse">
+                        <span class="drop-cap">N</span>o entreguéis vuestra capa al ver el sol naciente, pues ciertamente las mañanas más claras portan el frío más agudo.
+                    </p>
+                    <p class="verse">
+                        <span class="verse-number">7.</span> La luz promete calor, mas el aire muerde con dientes de invierno; así es la verdad desnuda, brillante pero gélida.
+                    </p>
+                    <div class="divider">~ ❄ ~</div>
+                </div>
+                <div class="back"></div>
+            </div>
+
+            <!-- PÁGINA 5: CONTENIDO 4 (Chispas) -->
+            <div class="page" id="p5">
+                <div class="front paper-texture">
+                    <h2>IV. La Semilla del Fuego</h2>
+                    <p class="verse">
+                        <span class="drop-cap">N</span>o menospreciéis la chispa errante que danza en la oscuridad, pues en su pequeñez duerme el incendio que ha de devorar los bosques.
+                    </p>
+                    <p class="verse">
+                        <span class="verse-number">9.</span> Lo que comienza en silencio termina en estruendo; y aquello que es ignorado por su tamaño, será temido por su furia.
+                    </p>
+                    <div class="divider">~ 🔥 ~</div>
+                </div>
+                <div class="back"></div>
+            </div>
+
+            <!-- PÁGINA 6: CONTENIDO 5 (Esencial) -->
+            <div class="page" id="p6">
+                <div class="front paper-texture">
+                    <h2>V. El Velo de la Carne</h2>
+                    <p class="verse">
+                        <span class="drop-cap">A</span>y de aquellos que solo confían en la mirada de sus ojos, pues ciertamente lo verdadero se oculta tras el velo de lo tangible.
+                    </p>
+                    <p class="verse">
+                        <span class="verse-number">11.</span> El corazón percibe lo que la luz no puede iluminar; pues la esencia del mundo es invisible a la carne y solo se revela al espíritu.
+                    </p>
+                </div>
+                <!-- Última página, reverso -->
+                <div class="back" style="background-color: var(--cover-color); background-image: none; display: flex; align-items: center; justify-content: center;">
+                    <p style="color: rgba(212, 175, 55, 0.5); font-family: 'Cinzel'; transform: rotateY(180deg);">FINIS</p>
+                </div>
+            </div>
+            
+            <div class="spine-shadow"></div>
         </div>
     </div>
 
-    <!-- Custom Work Section -->
-    <div class="bg-gradient-to-b from-white to-gray-100 border-t border-white py-12 relative z-10">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <div class="inline-block p-4 rounded-full bg-gradient-to-b from-white to-gray-200 shadow-md border border-white mb-4">
-                <i class="fa-solid fa-briefcase text-aero-blue text-2xl"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-gray-700 mb-3">Looking for Custom Development?</h3>
-            <p class="text-gray-500 mb-6">
-                We are available for hire! Experienced Builders & Scripters.
-            </p>
-            <div class="flex justify-center gap-4 text-sm font-bold text-gray-600">
-                <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">Builds</span>
-                <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">Scripting</span>
-                <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">UI Design</span>
-            </div>
-        </div>
+    <div class="controls" id="controls">
+        <button id="prevBtn" onclick="goPrev()">Anterior</button>
+        <button id="readBtn" onclick="toggleReading()">Leer Página</button>
+        <button id="nextBtn" onclick="goNext()">Siguiente</button>
     </div>
-
-    <!-- Footer -->
-    <footer class="bg-gradient-to-r from-gray-100 to-white border-t border-gray-200 py-12 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex justify-center gap-2 mb-4 items-center">
-                <i class="fa-solid fa-cube text-aero-blue text-xl"></i>
-                <span class="font-bold text-xl tracking-wide text-gray-600">RBX<span class="text-aero-blue">Assets</span></span>
-            </div>
-            <p class="text-gray-400 text-sm mb-6">
-                Made with <i class="fa-solid fa-heart text-pink-400"></i> for developers.
-            </p>
-            <p class="text-gray-400 text-xs">
-                &copy; 2023 RBXAssets. All rights reserved.
-            </p>
-        </div>
-    </footer>
 
     <script>
-        // Video Carousel Logic
-        const videos = [
-            "https://streamable.com/e/zqroic",
-            "https://streamable.com/e/h6qim2"
-        ];
-        let currentVideoIndex = 0;
+        // --- SISTEMA DE SEGURIDAD (OFUSCADO) ---
+        function checkSeal() {
+            const input = document.getElementById("passwordInput").value;
+            const errorMsg = document.getElementById("errorMsg");
+            const overlay = document.getElementById("login-overlay");
+            const bookScene = document.getElementById("bookScene");
+            const controls = document.getElementById("controls");
 
-        function updateCarousel() {
-            const iframe = document.getElementById('mechanics-video');
-            iframe.src = videos[currentVideoIndex];
+            // Codificamos la entrada del usuario en Base64
+            // Si la entrada es "2444618", btoa("2444618") genera "MjQ0NDYxOA=="
+            const encodedInput = btoa(input);
+
+            // La llave correcta fragmentada para que no sea legible en una sola línea
+            const part1 = "MjQ0";
+            const part2 = "NDYx";
+            const part3 = "OA==";
+            const sacredKey = part1 + part2 + part3;
+
+            if (encodedInput === sacredKey) {
+                // Éxito: Desvanecer overlay y mostrar libro
+                overlay.style.opacity = "0";
+                setTimeout(() => {
+                    overlay.style.display = "none";
+                    bookScene.style.opacity = "1";
+                    bookScene.style.transform = "scale(1)";
+                    controls.style.opacity = "1";
+                }, 1500);
+            } else {
+                // Error: Mostrar mensaje y agitar
+                errorMsg.style.opacity = "1";
+                const container = document.querySelector(".seal-container");
+                container.style.transform = "translateX(5px)";
+                setTimeout(() => container.style.transform = "translateX(-5px)", 50);
+                setTimeout(() => container.style.transform = "translateX(5px)", 100);
+                setTimeout(() => container.style.transform = "translateX(0)", 150);
+            }
         }
 
-        function changeVideo(direction) {
-            currentVideoIndex = (currentVideoIndex + direction + videos.length) % videos.length;
-            updateCarousel();
+        function handleEnter(e) {
+            if (e.key === "Enter") {
+                checkSeal();
+            }
+        }
+
+        // --- LÓGICA DEL LIBRO ---
+        let currentLocation = 1;
+        const numOfPages = 6;
+        const maxLocation = numOfPages + 1;
+
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const readBtn = document.getElementById("readBtn");
+        const book = document.getElementById("book");
+
+        const p1 = document.getElementById("p1");
+        const p2 = document.getElementById("p2");
+        const p3 = document.getElementById("p3");
+        const p4 = document.getElementById("p4");
+        const p5 = document.getElementById("p5");
+        const p6 = document.getElementById("p6");
+        
+        const synth = window.speechSynthesis;
+        let isSpeaking = false;
+
+        updateButtons();
+
+        function toggleReading() {
+            if (synth.speaking) {
+                synth.cancel();
+                readBtn.innerText = "Leer Página";
+                isSpeaking = false;
+                return;
+            }
+
+            let textToRead = "";
+
+            if (currentLocation === 1) {
+                textToRead = "El Libro del Insano. Evangelio de los Caídos.";
+            } else if (currentLocation === 2) {
+                const h2 = p2.querySelector('h2').innerText;
+                const verses = Array.from(p2.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
+                textToRead = h2 + ". " + verses;
+            } else if (currentLocation === 3) {
+                const h2 = p3.querySelector('h2').innerText;
+                const verses = Array.from(p3.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
+                textToRead = h2 + ". " + verses;
+            } else if (currentLocation === 4) {
+                const h2 = p4.querySelector('h2').innerText;
+                const verses = Array.from(p4.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
+                textToRead = h2 + ". " + verses;
+            } else if (currentLocation === 5) {
+                const h2 = p5.querySelector('h2').innerText;
+                const verses = Array.from(p5.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
+                textToRead = h2 + ". " + verses;
+            } else if (currentLocation === 6) {
+                const h2 = p6.querySelector('h2').innerText;
+                const verses = Array.from(p6.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
+                textToRead = h2 + ". " + verses;
+            } else if (currentLocation === 7) {
+                textToRead = "Fin del libro.";
+            }
+
+            if (textToRead) {
+                const utterance = new SpeechSynthesisUtterance(textToRead);
+                utterance.lang = 'es-ES';
+                utterance.rate = 0.8;
+                utterance.pitch = 0.8;
+                
+                utterance.onend = function() {
+                    readBtn.innerText = "Leer Página";
+                    isSpeaking = false;
+                };
+
+                synth.speak(utterance);
+                readBtn.innerText = "Detener Voz";
+                isSpeaking = true;
+            }
+        }
+
+        function stopSpeaking() {
+            if (synth.speaking) {
+                synth.cancel();
+                readBtn.innerText = "Leer Página";
+                isSpeaking = false;
+            }
+        }
+
+        function goNext() {
+            stopSpeaking();
+            if (currentLocation < maxLocation) {
+                switch (currentLocation) {
+                    case 1:
+                        openBook();
+                        p1.classList.add("flipped");
+                        p1.style.zIndex = 1;
+                        break;
+                    case 2:
+                        p2.classList.add("flipped");
+                        p2.style.zIndex = 2;
+                        break;
+                    case 3:
+                        p3.classList.add("flipped");
+                        p3.style.zIndex = 3;
+                        break;
+                    case 4:
+                        p4.classList.add("flipped");
+                        p4.style.zIndex = 4;
+                        break;
+                    case 5:
+                        p5.classList.add("flipped");
+                        p5.style.zIndex = 5;
+                        break;
+                    case 6:
+                        p6.classList.add("flipped");
+                        p6.style.zIndex = 6;
+                        closeBook();
+                        break;
+                }
+                currentLocation++;
+                updateButtons();
+            }
+        }
+
+        function goPrev() {
+            stopSpeaking();
+            if (currentLocation > 1) {
+                switch (currentLocation) {
+                    case 2:
+                        closeBook(true);
+                        p1.classList.remove("flipped");
+                        p1.style.zIndex = 8;
+                        break;
+                    case 3:
+                        p2.classList.remove("flipped");
+                        p2.style.zIndex = 7;
+                        break;
+                    case 4:
+                        p3.classList.remove("flipped");
+                        p3.style.zIndex = 6;
+                        break;
+                    case 5:
+                        p4.classList.remove("flipped");
+                        p4.style.zIndex = 5;
+                        break;
+                    case 6:
+                        p5.classList.remove("flipped");
+                        p5.style.zIndex = 4;
+                        break;
+                    case 7:
+                        openBook();
+                        p6.classList.remove("flipped");
+                        p6.style.zIndex = 3;
+                        break;
+                }
+                currentLocation--;
+                updateButtons();
+            }
+        }
+
+        function updateButtons() {
+            if (currentLocation === 1) {
+                prevBtn.disabled = true;
+                prevBtn.style.opacity = "0.5";
+            } else {
+                prevBtn.disabled = false;
+                prevBtn.style.opacity = "1";
+            }
+
+            if (currentLocation === maxLocation) {
+                nextBtn.disabled = true;
+                nextBtn.style.opacity = "0.5";
+            } else {
+                nextBtn.disabled = false;
+                nextBtn.style.opacity = "1";
+            }
+        }
+
+        function openBook() {
+            book.style.transform = "translateX(50%)";
+            if (window.innerWidth < 768) {
+                 book.style.transform = "translateX(0)";
+            }
+        }
+
+        function closeBook(isCover = false) {
+            if (isCover) {
+                book.style.transform = "translateX(0%)";
+            }
         }
     </script>
 </body>
