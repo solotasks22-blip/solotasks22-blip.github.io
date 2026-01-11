@@ -137,12 +137,22 @@
             height: 20px;
         }
 
-        /* --- BOTÓN DE AUDIO (MÁS PEQUEÑO) --- */
-        #audio-control-btn {
+        /* --- WRAPPER DE AUDIO Y BOTÓN --- */
+        #audio-wrapper {
             position: fixed;
             top: 15px;
             right: 15px;
             z-index: 5001;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0; /* Oculto hasta login */
+            transition: opacity 1.5s ease;
+        }
+
+        /* --- BOTÓN DE AUDIO (MÁS PEQUEÑO) --- */
+        #audio-control-btn {
             width: 35px; /* Más pequeño */
             height: 35px; /* Más pequeño */
             background: #2a0a0a;
@@ -156,12 +166,43 @@
             font-size: 1rem;
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
             transition: all 0.3s;
-            opacity: 0;
         }
 
         #audio-control-btn:hover {
             background: #4a0404;
             transform: scale(1.1);
+        }
+
+        /* --- SLIDER DE VOLUMEN --- */
+        #volumeSlider {
+            -webkit-appearance: none; 
+            width: 80px;
+            height: 6px;
+            background: rgba(42, 10, 10, 0.8);
+            outline: none;
+            border-radius: 3px;
+            border: 1px solid #5d4037;
+            cursor: pointer;
+        }
+
+        #volumeSlider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--gold);
+            cursor: pointer;
+            border: 1px solid #2a0a0a;
+        }
+
+        #volumeSlider::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--gold);
+            cursor: pointer;
+            border: 1px solid #2a0a0a;
         }
 
         /* --- CONTENIDO DEL LIBRO --- */
@@ -514,8 +555,11 @@
     <audio id="audioPlayer" loop></audio>
     <!-- <audio id="pageTurnAudio" src="..."></audio> ELIMINADO POR PETICIÓN -->
     
-    <!-- BOTÓN CONTROL AUDIO -->
-    <button id="audio-control-btn" onclick="toggleAudioState()">🔊</button>
+    <!-- WRAPPER PARA CONTROLES DE AUDIO -->
+    <div id="audio-wrapper">
+        <button id="audio-control-btn" onclick="toggleAudioState()">🔊</button>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.1" oninput="setVolume(this.value)">
+    </div>
 
     <!-- ESCENA DEL LIBRO -->
     <div class="book-scene" id="bookScene">
@@ -704,8 +748,8 @@
         // const pageTurnAudio Eliminado
         const audioBtn = document.getElementById('audio-control-btn');
         
-        // Volumen bajo
-        audioPlayer.volume = 0.2;
+        // Volumen bajo inicial
+        audioPlayer.volume = 0.1;
 
         // URLs de Audio
         const walterMusic = "https://res.cloudinary.com/dgycaxlug/video/upload/v1768096299/Gymnop%C3%A9die_No.1_eyoohq.mp3";
@@ -730,6 +774,10 @@
                 audioBtn.innerText = "🔇";
                 isUserMuted = true;
             }
+        }
+
+        function setVolume(val) {
+            audioPlayer.volume = val;
         }
 
         function playTurnSound() {
@@ -778,7 +826,7 @@
             const overlay = document.getElementById("login-overlay");
             const bookScene = document.getElementById("bookScene");
             const controls = document.getElementById("controls");
-            const musicToggleBtn = document.getElementById("audio-control-btn");
+            const audioWrapper = document.getElementById("audio-wrapper");
 
             const encodedInput = btoa(input);
             const part1 = "MjQ0";
@@ -793,7 +841,7 @@
                     bookScene.style.opacity = "1";
                     bookScene.style.transform = "scale(1)";
                     controls.style.opacity = "1";
-                    musicToggleBtn.style.opacity = "1";
+                    audioWrapper.style.opacity = "1"; // Mostrar wrapper
                     
                     checkMusic(); 
                 }, 1500);
