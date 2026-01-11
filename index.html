@@ -17,7 +17,7 @@
             --page-color: #f4e4bc;
             --text-color: #2c1810;
             --gold: #d4af37;
-            --duration: 1.2s;
+            --duration: 1.2s; /* Duración de la animación */
         }
 
         @media (min-width: 768px) {
@@ -123,7 +123,7 @@
             height: 20px;
         }
 
-        /* --- CONTENIDO DEL LIBRO (Oculto inicialmente por el overlay) --- */
+        /* --- CONTENIDO DEL LIBRO --- */
 
         .book-scene {
             position: relative;
@@ -131,7 +131,6 @@
             height: var(--book-height);
             transform-style: preserve-3d;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            /* Efecto de aparición al desbloquear */
             opacity: 0; 
             transform: scale(0.9);
             transition: opacity 2s ease, transform 2s ease;
@@ -142,6 +141,7 @@
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
+            transition: transform var(--duration) cubic-bezier(0.645, 0.045, 0.355, 1);
         }
 
         .page {
@@ -176,8 +176,8 @@
             box-shadow: inset 10px 0 20px rgba(0,0,0,0.1);
         }
 
-        /* --- ESTILOS DE LA TAPA (PORTADA) --- */
-        #p1 { z-index: 8; }
+        /* --- ESTILOS DE LA TAPA --- */
+        #p1 { z-index: 10; }
         
         #p1 .front {
             background-color: var(--cover-color);
@@ -193,6 +193,7 @@
             padding: 40px;
         }
 
+        /* --- ELEMENTOS DECORATIVOS --- */
         .cover-border {
             position: absolute;
             top: 20px; bottom: 20px; left: 20px; right: 20px;
@@ -238,7 +239,7 @@
             color: #d4af37;
         }
 
-        /* --- ESTILOS DE PÁGINAS INTERNAS --- */
+        /* --- ESTILOS INTERNOS --- */
         .paper-texture {
             background-color: var(--page-color);
             background-image: 
@@ -252,11 +253,14 @@
             box-shadow: inset 0 0 20px rgba(139, 69, 19, 0.1);
         }
 
-        #p2 { z-index: 7; }
-        #p3 { z-index: 6; }
-        #p4 { z-index: 5; }
-        #p5 { z-index: 4; }
-        #p6 { z-index: 3; }
+        /* Z-Index descendente */
+        #p2 { z-index: 9; } /* ÍNDICE */
+        #p3 { z-index: 8; }
+        #p4 { z-index: 7; }
+        #p5 { z-index: 6; }
+        #p6 { z-index: 5; }
+        #p7 { z-index: 4; }
+        #p8 { z-index: 3; } /* WALTER */
         
         h2 {
             font-family: 'Cinzel', serif;
@@ -303,13 +307,47 @@
             transform: rotateY(-180deg);
         }
 
+        /* --- ESTILOS DEL ÍNDICE --- */
+        .index-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+        }
+        
+        .index-list li {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .index-btn {
+            background: transparent;
+            border: none;
+            color: #2c1810;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .index-btn:hover {
+            color: #8b0000;
+            border-bottom: 1px solid #8b0000;
+            transform: scale(1.05);
+            box-shadow: none;
+            background: transparent;
+        }
+        
+        .index-btn::before { content: none; } /* Quitar borde dorado de botones generales */
+
         /* --- CONTROLES --- */
         .controls {
             margin-top: 40px;
             display: flex;
-            gap: 20px;
+            gap: 15px;
             z-index: 100;
-            opacity: 0; /* Oculto inicialmente */
+            opacity: 0;
             transition: opacity 2s ease;
         }
 
@@ -317,9 +355,9 @@
             background: #2a0a0a;
             color: var(--gold);
             border: 1px solid var(--gold);
-            padding: 10px 25px;
+            padding: 10px 20px;
             font-family: 'Cinzel', serif;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
@@ -352,12 +390,13 @@
             border: 1px solid rgba(212, 175, 55, 0.3);
         }
 
-        /* Botón de lectura especial */
-        #readBtn {
-            background: #4a0404;
-        }
-        #readBtn:hover {
-            background: #6a0606;
+        #readBtn { background: #4a0404; }
+        #readBtn:hover { background: #6a0606; }
+        
+        /* Botón de índice específico */
+        #indexBtn {
+            border-color: #8b0000;
+            color: #e3d2a8;
         }
 
         .spine-shadow {
@@ -415,8 +454,29 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 2: CONTENIDO 1 (Rubias) -->
+            <!-- PÁGINA 2: ÍNDICE (NUEVO) -->
             <div class="page" id="p2">
+                <div class="front paper-texture">
+                    <h2>Tabla de Contenidos</h2>
+                    <ul class="index-list">
+                        <li>
+                            <button class="index-btn" onclick="jumpToPage(3)">I. Frases del Insano</button>
+                            <div style="font-size: 0.8rem; font-style: italic; margin-top: 5px;">Sentencias y Revelaciones</div>
+                        </li>
+                        <li>
+                            <button class="index-btn" onclick="jumpToPage(8)">II. Escrituras de Walter</button>
+                            <div style="font-size: 0.8rem; font-style: italic; margin-top: 5px;">Profecías Ocultas</div>
+                        </li>
+                    </ul>
+                    <div class="divider">~ ⚜ ~</div>
+                </div>
+                <div class="back"></div>
+            </div>
+
+            <!-- SECCIÓN 1: FRASES DEL INSANO -->
+            
+            <!-- PÁGINA 3 (Rubias) -->
+            <div class="page" id="p3">
                 <div class="front paper-texture">
                     <h2>I. De la Luz Engañosa</h2>
                     <p class="verse">
@@ -430,8 +490,8 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 3: CONTENIDO 2 (Negros/Insanos) -->
-            <div class="page" id="p3">
+            <!-- PÁGINA 4 (Negros) -->
+            <div class="page" id="p4">
                 <div class="front paper-texture">
                     <h2>II. De la Estirpe Oscura</h2>
                     <p class="verse">
@@ -447,8 +507,8 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 4: CONTENIDO 3 (Mañanas Soleadas) -->
-            <div class="page" id="p4">
+            <!-- PÁGINA 5 (Mañanas) -->
+            <div class="page" id="p5">
                 <div class="front paper-texture">
                     <h2>III. La Paradoja Helada</h2>
                     <p class="verse">
@@ -462,8 +522,8 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 5: CONTENIDO 4 (Chispas) -->
-            <div class="page" id="p5">
+            <!-- PÁGINA 6 (Chispas) -->
+            <div class="page" id="p6">
                 <div class="front paper-texture">
                     <h2>IV. La Semilla del Fuego</h2>
                     <p class="verse">
@@ -477,8 +537,8 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 6: CONTENIDO 5 (Esencial) -->
-            <div class="page" id="p6">
+            <!-- PÁGINA 7 (Velo) -->
+            <div class="page" id="p7">
                 <div class="front paper-texture">
                     <h2>V. El Velo de la Carne</h2>
                     <p class="verse">
@@ -486,6 +546,23 @@
                     </p>
                     <p class="verse">
                         <span class="verse-number">11.</span> El corazón percibe lo que la luz no puede iluminar; pues la esencia del mundo es invisible a la carne y solo se revela al espíritu.
+                    </p>
+                </div>
+                <div class="back"></div>
+            </div>
+
+            <!-- SECCIÓN 2: ESCRITURAS DE WALTER (NUEVO) -->
+            
+            <!-- PÁGINA 8 (Walter Intro) -->
+            <div class="page" id="p8">
+                <div class="front paper-texture">
+                    <h2>Las Escrituras de Walter</h2>
+                    <div class="divider">✦</div>
+                    <p class="verse">
+                        <span class="drop-cap">H</span>e aquí las visiones de Walter, aquel que caminó entre los mundos y trajo palabras de los vientos antiguos.
+                    </p>
+                    <p class="verse" style="font-style: italic; text-align: center; margin-top: 40px;">
+                        (Página reservada para futuras profecías)
                     </p>
                 </div>
                 <!-- Última página, reverso -->
@@ -501,6 +578,7 @@
     <div class="controls" id="controls">
         <button id="prevBtn" onclick="goPrev()">Anterior</button>
         <button id="readBtn" onclick="toggleReading()">Leer Página</button>
+        <button id="indexBtn" onclick="jumpToPage(2)">Índice</button> <!-- Botón de retorno -->
         <button id="nextBtn" onclick="goNext()">Siguiente</button>
     </div>
 
@@ -513,18 +591,13 @@
             const bookScene = document.getElementById("bookScene");
             const controls = document.getElementById("controls");
 
-            // Codificamos la entrada del usuario en Base64
-            // Si la entrada es "2444618", btoa("2444618") genera "MjQ0NDYxOA=="
             const encodedInput = btoa(input);
-
-            // La llave correcta fragmentada para que no sea legible en una sola línea
             const part1 = "MjQ0";
             const part2 = "NDYx";
             const part3 = "OA==";
             const sacredKey = part1 + part2 + part3;
 
             if (encodedInput === sacredKey) {
-                // Éxito: Desvanecer overlay y mostrar libro
                 overlay.style.opacity = "0";
                 setTimeout(() => {
                     overlay.style.display = "none";
@@ -533,7 +606,6 @@
                     controls.style.opacity = "1";
                 }, 1500);
             } else {
-                // Error: Mostrar mensaje y agitar
                 errorMsg.style.opacity = "1";
                 const container = document.querySelector(".seal-container");
                 container.style.transform = "translateX(5px)";
@@ -551,25 +623,55 @@
 
         // --- LÓGICA DEL LIBRO ---
         let currentLocation = 1;
-        const numOfPages = 6;
+        const numOfPages = 8;
         const maxLocation = numOfPages + 1;
+        let isAnimating = false; // FLAG DE SEGURIDAD
+        let jumpInterval = null; // CONTROL DE SALTOS
 
         const prevBtn = document.getElementById("prevBtn");
         const nextBtn = document.getElementById("nextBtn");
         const readBtn = document.getElementById("readBtn");
         const book = document.getElementById("book");
-
-        const p1 = document.getElementById("p1");
-        const p2 = document.getElementById("p2");
-        const p3 = document.getElementById("p3");
-        const p4 = document.getElementById("p4");
-        const p5 = document.getElementById("p5");
-        const p6 = document.getElementById("p6");
+        
+        // Mapeo de páginas dinámico
+        const pages = [];
+        for(let i=1; i<=numOfPages; i++) {
+            pages[i] = document.getElementById(`p${i}`);
+        }
         
         const synth = window.speechSynthesis;
         let isSpeaking = false;
 
         updateButtons();
+
+        // --- FUNCIÓN DE SALTO (Navegación Mágica) ---
+        function jumpToPage(targetPage) {
+            stopSpeaking();
+            clearInterval(jumpInterval); // Detener saltos previos
+            
+            if (targetPage === currentLocation) return;
+
+            // Si queremos ir adelante
+            if (targetPage > currentLocation) {
+                jumpInterval = setInterval(() => {
+                    if (currentLocation < targetPage) {
+                        goNext(true); // true = fast mode
+                    } else {
+                        clearInterval(jumpInterval);
+                    }
+                }, 150); // Velocidad rápida
+            } 
+            // Si queremos ir atrás
+            else {
+                jumpInterval = setInterval(() => {
+                    if (currentLocation > targetPage) {
+                        goPrev(true);
+                    } else {
+                        clearInterval(jumpInterval);
+                    }
+                }, 150);
+            }
+        }
 
         function toggleReading() {
             if (synth.speaking) {
@@ -580,30 +682,20 @@
             }
 
             let textToRead = "";
+            const pageEl = pages[currentLocation];
 
             if (currentLocation === 1) {
                 textToRead = "El Libro del Insano. Evangelio de los Caídos.";
             } else if (currentLocation === 2) {
-                const h2 = p2.querySelector('h2').innerText;
-                const verses = Array.from(p2.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
+                textToRead = "Tabla de contenidos. Frases del Insano. Escrituras de Walter.";
+            } else if (currentLocation >= 3 && currentLocation < 8) {
+                // Lectura estándar de versículos
+                const h2 = pageEl.querySelector('h2') ? pageEl.querySelector('h2').innerText : "";
+                const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
                 textToRead = h2 + ". " + verses;
-            } else if (currentLocation === 3) {
-                const h2 = p3.querySelector('h2').innerText;
-                const verses = Array.from(p3.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
-                textToRead = h2 + ". " + verses;
-            } else if (currentLocation === 4) {
-                const h2 = p4.querySelector('h2').innerText;
-                const verses = Array.from(p4.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
-                textToRead = h2 + ". " + verses;
-            } else if (currentLocation === 5) {
-                const h2 = p5.querySelector('h2').innerText;
-                const verses = Array.from(p5.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
-                textToRead = h2 + ". " + verses;
-            } else if (currentLocation === 6) {
-                const h2 = p6.querySelector('h2').innerText;
-                const verses = Array.from(p6.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
-                textToRead = h2 + ". " + verses;
-            } else if (currentLocation === 7) {
+            } else if (currentLocation === 8) {
+                textToRead = "Las Escrituras de Walter. He aquí las visiones de Walter, aquel que caminó entre los mundos.";
+            } else if (currentLocation === 9) {
                 textToRead = "Fin del libro.";
             }
 
@@ -632,75 +724,74 @@
             }
         }
 
-        function goNext() {
+        function goNext(fastMode = false) {
+            if (!fastMode) clearInterval(jumpInterval); // Detener auto-salto si el usuario interrumpe
+
+            // BLOQUEO ANTI-SPAM (Solo afecta clic manual, no fastMode)
+            if (isAnimating && !fastMode) return;
+            if (!fastMode) isAnimating = true;
+
             stopSpeaking();
+            
             if (currentLocation < maxLocation) {
-                switch (currentLocation) {
-                    case 1:
-                        openBook();
-                        p1.classList.add("flipped");
-                        p1.style.zIndex = 1;
-                        break;
-                    case 2:
-                        p2.classList.add("flipped");
-                        p2.style.zIndex = 2;
-                        break;
-                    case 3:
-                        p3.classList.add("flipped");
-                        p3.style.zIndex = 3;
-                        break;
-                    case 4:
-                        p4.classList.add("flipped");
-                        p4.style.zIndex = 4;
-                        break;
-                    case 5:
-                        p5.classList.add("flipped");
-                        p5.style.zIndex = 5;
-                        break;
-                    case 6:
-                        p6.classList.add("flipped");
-                        p6.style.zIndex = 6;
-                        closeBook();
-                        break;
+                if (currentLocation === 1) openBook();
+                
+                const currPage = pages[currentLocation];
+                if (currPage) {
+                    currPage.classList.add("flipped");
+                    // Ajuste de z-index con delay para suavidad
+                    let delay = fastMode ? 50 : 600;
+                    setTimeout(() => { 
+                        currPage.style.zIndex = currentLocation; 
+                    }, delay);
                 }
+                
+                if (currentLocation === numOfPages) closeBook();
+                
                 currentLocation++;
-                updateButtons();
+                if(!fastMode) updateButtons();
+
+                // Liberar bloqueo después de la animación
+                if (!fastMode) setTimeout(() => { isAnimating = false; }, 1200);
+            } else {
+                if (!fastMode) isAnimating = false;
             }
         }
 
-        function goPrev() {
+        function goPrev(fastMode = false) {
+            if (!fastMode) clearInterval(jumpInterval); // Detener auto-salto si el usuario interrumpe
+
+            // BLOQUEO ANTI-SPAM
+            if (isAnimating && !fastMode) return;
+            if (!fastMode) isAnimating = true;
+
             stopSpeaking();
+            
             if (currentLocation > 1) {
-                switch (currentLocation) {
-                    case 2:
-                        closeBook(true);
-                        p1.classList.remove("flipped");
-                        p1.style.zIndex = 8;
-                        break;
-                    case 3:
-                        p2.classList.remove("flipped");
-                        p2.style.zIndex = 7;
-                        break;
-                    case 4:
-                        p3.classList.remove("flipped");
-                        p3.style.zIndex = 6;
-                        break;
-                    case 5:
-                        p4.classList.remove("flipped");
-                        p4.style.zIndex = 5;
-                        break;
-                    case 6:
-                        p5.classList.remove("flipped");
-                        p5.style.zIndex = 4;
-                        break;
-                    case 7:
-                        openBook();
-                        p6.classList.remove("flipped");
-                        p6.style.zIndex = 3;
-                        break;
-                }
                 currentLocation--;
-                updateButtons();
+                
+                const prevPage = pages[currentLocation];
+                
+                if (currentLocation === numOfPages) openBook();
+
+                if (prevPage) {
+                    // CORRECCIÓN DE Z-INDEX: (Total + 3) garantiza que esté ENCIMA de la siguiente página
+                    prevPage.style.zIndex = (numOfPages + 3) - currentLocation; 
+                    
+                    if (currentLocation === 1) {
+                         // Caso especial tapa
+                         setTimeout(() => { closeBook(true); }, fastMode ? 50 : 200);
+                    }
+
+                    prevPage.classList.remove("flipped");
+                }
+                
+                if(!fastMode) updateButtons();
+
+                // Liberar bloqueo
+                if (!fastMode) setTimeout(() => { isAnimating = false; }, 1200);
+            } else {
+                if (!fastMode) isAnimating = false;
             }
         }
 
