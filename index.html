@@ -12,18 +12,17 @@
     <style>
         :root {
             /* --- DIMENSIONES AJUSTADAS (MÁS ANGOSTO) --- */
-            /* Se ha reducido el ancho para que sea más rectangular (formato retrato) */
             --book-width: clamp(300px, 40vw, 550px); 
             --book-height: clamp(500px, 85vh, 900px);
             
             --cover-color: #4a0404; 
             --page-color: #f4e4bc;
-            --text-color: #000000; /* Texto negro puro para máximo contraste */
+            --text-color: #000000;
             --gold: #d4af37;
             --duration: 1.2s;
             
-            /* --- TIPOGRAFÍA MÁS GRANDE Y VISIBLE (AUMENTADO) --- */
-            --font-size-base: clamp(1.4rem, 2.8vmin, 1.8rem); /* Mucho más grande */
+            /* --- TIPOGRAFÍA --- */
+            --font-size-base: clamp(1.4rem, 2.8vmin, 1.8rem);
             --font-size-h2: clamp(1.8rem, 4.5vmin, 2.5rem);
             --font-size-title: clamp(2.8rem, 9vmin, 5rem);
         }
@@ -31,9 +30,9 @@
         /* Ajustes específicos para móviles */
         @media (max-width: 600px) {
             :root {
-                --book-width: 90vw; /* Un poco menos de borde a borde */
-                --book-height: 80vh; /* Más alto en móvil */
-                --font-size-base: 1.3rem; /* Base sólida en móvil */
+                --book-width: 90vw;
+                --book-height: 80vh;
+                --font-size-base: 1.3rem;
             }
             
             .book-scene {
@@ -49,7 +48,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Centrado vertical */
+            justify-content: center;
             font-family: 'Cormorant Garamond', serif;
             overflow: hidden;
             perspective: 1500px;
@@ -147,14 +146,14 @@
             flex-direction: column;
             align-items: center;
             gap: 8px;
-            opacity: 0; /* Oculto hasta login */
+            opacity: 0;
             transition: opacity 1.5s ease;
         }
 
-        /* --- BOTÓN DE AUDIO (MÁS PEQUEÑO) --- */
+        /* --- BOTÓN DE AUDIO --- */
         #audio-control-btn {
-            width: 35px; /* Más pequeño */
-            height: 35px; /* Más pequeño */
+            width: 35px;
+            height: 35px;
             background: #2a0a0a;
             border: 1px solid var(--gold);
             border-radius: 50%;
@@ -216,7 +215,7 @@
             opacity: 0; 
             transform: scale(0.9);
             transition: opacity 2s ease, transform 2s ease;
-            margin-bottom: 10px; /* Separación mínima con botones */
+            margin-bottom: 10px;
         }
 
         .book {
@@ -260,7 +259,7 @@
         }
 
         /* --- ESTILOS DE LA TAPA --- */
-        #p1 { z-index: 14; } /* Ajustado Z-Index máximo para 12 páginas */
+        #p1 { z-index: 16; } /* Ajustado Z-Index máximo para 14 páginas */
         
         #p1 .front {
             background-color: var(--cover-color);
@@ -324,7 +323,7 @@
             color: #d4af37;
         }
 
-        /* --- ESTILOS INTERNOS (ADAPTADOS) --- */
+        /* --- ESTILOS INTERNOS --- */
         .paper-texture {
             background-color: var(--page-color);
             background-image: 
@@ -336,11 +335,9 @@
             padding: clamp(25px, 6%, 50px);
             color: var(--text-color);
             box-shadow: inset 0 0 20px rgba(139, 69, 19, 0.1);
-            
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            
             overflow-y: auto;
             scrollbar-width: none;
             -ms-overflow-style: none;
@@ -351,18 +348,20 @@
             height: 0;
         }
 
-        /* Z-INDEX STACK CORREGIDO PARA 12 PAGINAS */
-        #p2 { z-index: 13; }
-        #p3 { z-index: 12; }
-        #p4 { z-index: 11; }
-        #p5 { z-index: 10; }
-        #p6 { z-index: 9; }
-        #p7 { z-index: 8; }
-        #p8 { z-index: 7; }
-        #p9 { z-index: 6; } 
-        #p10 { z-index: 5; } /* Nueva Portada ST */
-        #p11 { z-index: 4; } /* ST Parte 1 */
-        #p12 { z-index: 3; } /* ST Parte 2 */
+        /* Z-INDEX STACK CORREGIDO PARA 14 PAGINAS */
+        #p2 { z-index: 15; }
+        #p3 { z-index: 14; }
+        #p4 { z-index: 13; }
+        #p5 { z-index: 12; }
+        #p6 { z-index: 11; }
+        #p7 { z-index: 10; }
+        #p8 { z-index: 9; }
+        #p9 { z-index: 8; } 
+        #p10 { z-index: 7; } /* Walter Historia Parte 1 (NUEVO) */
+        #p11 { z-index: 6; } /* Walter Historia Parte 2 (NUEVO) */
+        #p12 { z-index: 5; } /* ST Intro */
+        #p13 { z-index: 4; } /* ST Parte 1 */
+        #p14 { z-index: 3; } /* ST Parte 2 */
         
         h2 {
             font-family: 'Cinzel', serif;
@@ -372,13 +371,13 @@
             font-size: var(--font-size-h2);
             color: #4a2c22;
             margin-top: 5px;
-            font-weight: 800; /* Más negrita */
+            font-weight: 800;
         }
 
         h3 {
             font-family:'Cinzel'; 
             text-align:center; 
-            font-size: clamp(1.3rem, 3.5vmin, 1.6rem); /* Aumentado */
+            font-size: clamp(1.3rem, 3.5vmin, 1.6rem);
             color:#8b0000; 
             border-bottom:1px solid #8b0000; 
             padding-bottom:5px;
@@ -388,10 +387,10 @@
 
         .verse {
             font-size: var(--font-size-base);
-            line-height: 1.5; /* Ligeramente más compacto para que quepa */
+            line-height: 1.5;
             text-align: justify;
             margin-top: 15px;
-            font-weight: 700; /* Texto más grueso para visibilidad */
+            font-weight: 700;
         }
 
         .drop-cap {
@@ -429,12 +428,12 @@
             border: 4px double #5d4037;
             border-radius: 4px;
             box-shadow: 2px 4px 8px rgba(0,0,0,0.4);
-            filter: sepia(0.5) contrast(1.1) brightness(0.9); /* Efecto antiguo */
+            filter: sepia(0.5) contrast(1.1) brightness(0.9);
             transition: filter 0.5s;
         }
         
         .walter-portrait:hover {
-            filter: sepia(0) contrast(1) brightness(1); /* Color al hover */
+            filter: sepia(0) contrast(1) brightness(1);
         }
 
         .flipped {
@@ -462,13 +461,13 @@
             border: none;
             color: #2c1810;
             font-family: 'Cinzel', serif;
-            font-size: clamp(1.4rem, 3.5vmin, 1.7rem); /* Índice más grande */
+            font-size: clamp(1.4rem, 3.5vmin, 1.7rem);
             font-weight: bold;
             cursor: pointer;
             padding: 5px 10px;
             border-bottom: 1px solid transparent;
             transition: all 0.3s;
-            white-space: normal; /* Permitir saltos de línea si es necesario */
+            white-space: normal;
         }
         
         .index-btn:hover {
@@ -482,7 +481,6 @@
 
         /* --- CONTROLES (BOTONES PEQUEÑOS) --- */
         .controls {
-            /* Posición ajustada para no tapar */
             position: absolute;
             bottom: 10px;
             width: 100%;
@@ -493,18 +491,17 @@
             transition: opacity 2s ease;
             flex-wrap: wrap;
             justify-content: center;
-            pointer-events: none; /* Dejar pasar clicks fuera de los botones */
+            pointer-events: none;
         }
 
-        /* Botones específicos de control */
         .ctrl-btn {
-            pointer-events: auto; /* Reactivar clicks en los botones */
-            background: rgba(42, 10, 10, 0.9); /* Un poco transparente */
+            pointer-events: auto;
+            background: rgba(42, 10, 10, 0.9);
             color: var(--gold);
             border: 1px solid var(--gold);
-            padding: 6px 12px; /* PADDING REDUCIDO */
+            padding: 6px 12px;
             font-family: 'Cinzel', serif;
-            font-size: 0.75rem; /* FUENTE MÁS PEQUEÑA */
+            font-size: 0.75rem;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.5);
@@ -512,7 +509,7 @@
             letter-spacing: 1px;
             position: relative;
             overflow: hidden;
-            min-width: 80px; /* Ancho mínimo reducido */
+            min-width: 80px;
             border-radius: 4px;
         }
 
@@ -570,9 +567,8 @@
         </div>
     </div>
 
-    <!-- AUDIO PLAYERS (SONIDO DE PÁGINA ELIMINADO) -->
+    <!-- AUDIO PLAYERS -->
     <audio id="audioPlayer" loop></audio>
-    <!-- AUDIO DESBLOQUEO -->
     <audio id="unlockAudio" src="https://res.cloudinary.com/dgycaxlug/video/upload/v1768100657/Efecto_de_sonido_de_impacto_de_suspenso_IV_pocitn.mp3"></audio>
     
     <!-- WRAPPER PARA CONTROLES DE AUDIO -->
@@ -613,7 +609,7 @@
                             <button class="index-btn" onclick="jumpToPage(8)">II. Escrituras de Walter</button>
                         </li>
                          <li>
-                            <button class="index-btn" onclick="jumpToPage(10)">III. Escrituras de ST</button>
+                            <button class="index-btn" onclick="jumpToPage(12)">III. Escrituras de ST</button>
                         </li>
                     </ul>
                     <div class="divider">~ ⚜ ~</div>
@@ -623,7 +619,7 @@
 
             <!-- SECCIÓN 1: FRASES DEL INSANO -->
             
-            <!-- PÁGINA 3 (Rubias) -->
+            <!-- PÁGINA 3 -->
             <div class="page" id="p3">
                 <div class="front paper-texture">
                     <h2>I. De la Luz Engañosa</h2>
@@ -638,7 +634,7 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 4 (Negros) -->
+            <!-- PÁGINA 4 -->
             <div class="page" id="p4">
                 <div class="front paper-texture">
                     <h2>II. De la Estirpe Oscura</h2>
@@ -655,7 +651,7 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 5 (Mañanas) -->
+            <!-- PÁGINA 5 -->
             <div class="page" id="p5">
                 <div class="front paper-texture">
                     <h2>III. La Paradoja Helada</h2>
@@ -670,7 +666,7 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 6 (Chispas) -->
+            <!-- PÁGINA 6 -->
             <div class="page" id="p6">
                 <div class="front paper-texture">
                     <h2>IV. La Semilla del Fuego</h2>
@@ -685,7 +681,7 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 7 (Velo) -->
+            <!-- PÁGINA 7 -->
             <div class="page" id="p7">
                 <div class="front paper-texture">
                     <h2>V. El Velo de la Carne</h2>
@@ -734,10 +730,50 @@
                 <div class="back"></div>
             </div>
 
+            <!-- PÁGINA 10 (Walter Historia I - NUEVA) -->
+            <div class="page" id="p10">
+                <div class="front paper-texture">
+                    <h3>Del Refugio Onírico (I)</h3>
+                    
+                    <p class="verse">
+                        <span class="drop-cap">Y</span> al caer la noche, vi cómo la marea de la conciencia se replegaba ante el mandato oscuro del sueño. Y el dormir se alzó como un refugio temporal, una grieta en el tejido de una realidad que me es ajena; un universo al que observo como espectador silente y lejano.
+                    </p>
+                    
+                    <p class="verse">
+                        <span class="verse-number">2.5</span> Anhelo pues la disolución, el dulce abandono de este yo que no halla su eco en el mundo. El sueño es el portal hacia otras existencias, un viaje sin movimiento.
+                    </p>
+
+                    <p class="verse">
+                        <span class="verse-number">2.6</span> En sus dominios, la dicha es a veces destello fugaz, eco de lo que podría ser. Mas otras veces es vacío, caída en la quietud insondable de la no-conciencia, ensayo de la inexistencia.
+                    </p>
+                </div>
+                <div class="back"></div>
+            </div>
+
+            <!-- PÁGINA 11 (Walter Historia II - NUEVA) -->
+            <div class="page" id="p11">
+                <div class="front paper-texture">
+                    <h3>Del Refugio Onírico (II)</h3>
+                    
+                    <p class="verse">
+                        <span class="verse-number">2.7</span> Porque dejar de ser consciente es, en esencia, dejar de ser. Es desvanecerse en la nada, muerte efímera que no aterra, sino que ofrece un consuelo gélido. En esa anulación hallo la paz que la vigilia niega.
+                    </p>
+                    
+                    <p class="verse">
+                        <span class="verse-number">2.8</span> Mas pregunto: ¿Cuál es el propósito de este ciclo incesante? La conciencia regresa, la realidad se impone y la extrañeza se agudiza. El sueño, promesa de liberación, se torna simple paréntesis, ilusión de escape.
+                    </p>
+
+                    <p class="verse">
+                        <span class="verse-number">2.9</span> Y así gira la rueda. Noches de calma prestada se alternan con la mente exhausta que, tras lucha inútil, se rinde al peso de su propia existencia, anhelando de nuevo el silencio del no ser.
+                    </p>
+                </div>
+                <div class="back"></div>
+            </div>
+
             <!-- SECCIÓN 3: ESCRITURAS DE ST -->
             
-            <!-- PÁGINA 10 (ST Intro - NUEVA PAGINA DE TITULO) -->
-            <div class="page" id="p10">
+            <!-- PÁGINA 12 (ST Intro) -->
+            <div class="page" id="p12">
                 <div class="front paper-texture">
                     <h2>Las Escrituras de ST</h2>
                     <div class="divider">⚜</div>
@@ -745,14 +781,14 @@
                         <span class="drop-cap">Y</span> aconteció que en los días del gran silencio, surgió la voz de ST, el Soñador Inmortal. Aquel que sacrificó su cordura en el altar del caos para forjar caminos donde solo había abismo.
                     </p>
                     <p class="verse">
-                        <span class="verse-number">3.2</span> Prestad atención a sus parábolas, pues en ellas se esconde la llave de las puertas cerradas y el mapa de los laberintos del alma.
+                        <span class="verse-number">3.1</span> Prestad atención a sus parábolas, pues en ellas se esconde la llave de las puertas cerradas y el mapa de los laberintos del alma.
                     </p>
                 </div>
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 11 (ST Intro Parte 1) -->
-            <div class="page" id="p11">
+            <!-- PÁGINA 13 (ST Intro Parte 1) -->
+            <div class="page" id="p13">
                 <div class="front paper-texture">
                     <h3>I. La Parábola del Pastel Prohibido (I)</h3>
                     
@@ -760,22 +796,22 @@
                         <span class="drop-cap">A</span>conteció en el tercer día del mes duodécimo, bajo el signo del invierno austral, que tras el amargo rechazo de las Damas de la Flor, la Hermandad Verdadera —conocida entre los sabios como la SoloGang— se congregó en el santuario de Walter. Juan, Isaac, y el mismo Walter aguardaban, mas la incertidumbre nublaba sus copas.
                     </p>
                     <p class="verse">
-                        <span class="verse-number">3.4</span> Y he aquí que las puertas se abrieron para una invitada inesperada, llamada Loop, cuya presencia era un enigma. Entonces ST, viendo la duda en los ojos de sus hermanos, comprendió que el destino exigía un sacrificio de sangre y vino.
+                        <span class="verse-number">3.2</span> Y he aquí que las puertas se abrieron para una invitada inesperada, llamada Loop, cuya presencia era un enigma. Entonces ST, viendo la duda en los ojos de sus hermanos, comprendió que el destino exigía un sacrificio de sangre y vino.
                     </p>
                 </div>
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 12 (ST Intro Parte 2) -->
-            <div class="page" id="p12">
+            <!-- PÁGINA 14 (ST Intro Parte 2) -->
+            <div class="page" id="p14">
                 <div class="front paper-texture">
                     <h3>I. La Parábola del Pastel Prohibido (II)</h3>
                     
                     <p class="verse">
-                        <span class="verse-number">3.5</span> Así pues, ST bebió del cáliz del vértigo hasta embriagar su espíritu, despojándose de la vergüenza para ganar el favor de la recién llegada. Con lengua desatada y astucia de serpiente, forjó una alianza en el fuego de la embriaguez, abriendo el sendero para su hermano.
+                        <span class="verse-number">3.3</span> Así pues, ST bebió del cáliz del vértigo hasta embriagar su espíritu, despojándose de la vergüenza para ganar el favor de la recién llegada. Con lengua desatada y astucia de serpiente, forjó una alianza en el fuego de la embriaguez, abriendo el sendero para su hermano.
                     </p>
                     <p class="verse">
-                        <span class="verse-number">3.6</span> Y gracias a esta ofrenda, Walter pudo probar la dulzura del pastel prohibido sin estorbo alguno. ST, ahora el Soñador Inmortal, da testimonio eterno de que la misión fue consumada en gloria, y que el sacrificio de uno fue la victoria de todos.
+                        <span class="verse-number">3.4</span> Y gracias a esta ofrenda, Walter pudo probar la dulzura del pastel prohibido sin estorbo alguno. ST, ahora el Soñador Inmortal, da testimonio eterno de que la misión fue consumada en gloria, y que el sacrificio de uno fue la victoria de todos.
                     </p>
                 </div>
                 <!-- Última página, reverso -->
@@ -842,9 +878,9 @@
             // Lógica de reproducción automática basada en la página
             let targetSrc = "";
 
-            if (currentLocation === 8 || currentLocation === 9) { // WALTER
+            if (currentLocation >= 8 && currentLocation <= 11) { // WALTER (8, 9, 10, 11)
                 targetSrc = walterMusic;
-            } else if (currentLocation >= 10 && currentLocation <= 12) { // ST (Págs 10, 11, 12)
+            } else if (currentLocation >= 12 && currentLocation <= 14) { // ST (12, 13, 14)
                 targetSrc = stMusic;
             }
 
@@ -921,7 +957,7 @@
 
         // --- LÓGICA DEL LIBRO ---
         let currentLocation = 1;
-        const numOfPages = 12; // AUMENTADO A 12 PÁGINAS
+        const numOfPages = 14; // AUMENTADO A 14 PÁGINAS
         const maxLocation = numOfPages + 1;
         let isAnimating = false;
         let jumpInterval = null;
@@ -995,12 +1031,18 @@
                 textToRead = h2 + ". " + verses;
             } else if (currentLocation === 9) { 
                 textToRead = "El Rostro del Maestro. No miréis solo la carne, sino el abismo que devuelve la mirada desde sus ojos. He aquí la efigie de aquel que camina entre las sombras, capturada en trazos de luz y tiempo; no para la vanidad del presente, sino como testigo mudo para las eras venideras.";
-            } else if (currentLocation === 10) { // NUEVA PORTADA ST
+            } else if (currentLocation === 10) { // HISTORIA WALTER I
+                 const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
+                textToRead = "Del Refugio Onírico, parte uno. " + verses;
+            } else if (currentLocation === 11) { // HISTORIA WALTER II
+                 const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
+                textToRead = "Del Refugio Onírico, parte dos. " + verses;
+            } else if (currentLocation === 12) { // NUEVA PORTADA ST
                 textToRead = "Las Escrituras de ST. Y aconteció que en los días del gran silencio, surgió la voz de ST, el Soñador Inmortal. Aquel que sacrificó su cordura en el altar del caos para forjar caminos donde solo había abismo. Prestad atención a sus parábolas, pues en ellas se esconde la llave de las puertas cerradas y el mapa de los laberintos del alma.";
-            } else if (currentLocation === 11) { // ST PARTE 1
+            } else if (currentLocation === 13) { // ST PARTE 1
                  const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
                 textToRead = "Las Escrituras de ST. Parte Uno. " + verses;
-            } else if (currentLocation === 12) { // ST PARTE 2
+            } else if (currentLocation === 14) { // ST PARTE 2
                  const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
                 textToRead = "Las Escrituras de ST. Parte Dos. " + verses;
             }
