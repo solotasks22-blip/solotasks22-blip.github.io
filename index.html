@@ -4,36 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Libro del Insano</title>
+    <!-- Importamos fuentes que evoquen antigüedad y misticismo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* --- DIMENSIONES MAXIMIZADAS --- */
-            /* Aumentado a 50vmin ancho y 80vmin alto para ocupar más pantalla */
-            --book-width: clamp(320px, 50vmin, 600px);
-            --book-height: clamp(480px, 80vmin, 900px);
+            /* --- DIMENSIONES RESPONSIVAS --- */
+            /* El ancho base es relativo al lado más pequeño de la pantalla (vmin) */
+            /* Esto asegura que quepa tanto en vertical como en horizontal */
+            --book-width: clamp(280px, 40vmin, 450px);
+            --book-height: clamp(420px, 60vmin, 650px);
             
             --cover-color: #4a0404; 
             --page-color: #f4e4bc;
-            /* Texto más oscuro y contrastado */
-            --text-color: #050200; 
+            --text-color: #2c1810;
             --gold: #d4af37;
             --duration: 1.2s;
             
-            /* Fuentes más grandes y legibles */
-            --font-size-base: clamp(1.1rem, 2.5vmin, 1.4rem);
-            --font-size-h2: clamp(1.5rem, 4vmin, 2rem);
-            --font-size-title: clamp(2rem, 6vmin, 3.5rem);
+            /* Tamaños de fuente fluidos */
+            --font-size-base: clamp(0.9rem, 2vmin, 1.1rem);
+            --font-size-h2: clamp(1.2rem, 3vmin, 1.5rem);
+            --font-size-title: clamp(1.8rem, 5vmin, 2.5rem);
         }
 
-        /* Ajustes para móviles verticales */
-        @media (max-width: 600px) {
+        /* Ajustes específicos para móviles muy estrechos */
+        @media (max-width: 480px) {
             :root {
-                --book-width: 90vw;
-                --book-height: 135vw; /* Ratio ajustado */
-                --font-size-base: 1.1rem; /* Texto base legible en móvil */
+                --book-width: 85vw;
+                --book-height: 127vw; /* Ratio 1:1.5 */
             }
         }
 
@@ -51,7 +51,7 @@
             perspective: 1500px;
         }
 
-        /* --- PANTALLA DE BLOQUEO --- */
+        /* --- PANTALLA DE BLOQUEO (LOGIN) --- */
         #login-overlay {
             position: fixed;
             top: 0;
@@ -76,13 +76,13 @@
             box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
             background: rgba(20, 0, 0, 0.8);
             max-width: 90%;
-            width: 350px; /* Un poco más ancho */
+            width: 300px;
         }
 
         .seal-title {
             font-family: 'Cinzel', serif;
             color: var(--gold);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -94,7 +94,7 @@
             border-bottom: 2px solid #5d4037;
             color: #f4e4bc;
             font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             text-align: center;
             padding: 10px;
             width: 80%;
@@ -111,12 +111,11 @@
             background: #2a0a0a;
             color: var(--gold);
             border: 1px solid var(--gold);
-            padding: 15px 40px;
+            padding: 12px 30px;
             font-family: 'Cinzel', serif;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 1.1rem;
             transition: all 0.3s;
         }
 
@@ -127,48 +126,49 @@
 
         .error-msg {
             color: #ff3333;
-            font-size: 1rem;
+            font-size: 0.9rem;
             margin-top: 15px;
             opacity: 0;
             transition: opacity 0.3s;
             height: 20px;
         }
 
-        /* --- BOTÓN DE AUDIO --- */
+        /* --- BOTÓN DE AUDIO (SIMPLE) --- */
         #audio-control-btn {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 5001;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background: #2a0a0a;
-            border: 2px solid var(--gold);
+            border: 1px solid var(--gold);
             border-radius: 50%;
             color: var(--gold);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.5rem;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            font-size: 1.2rem;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
             transition: all 0.3s;
-            opacity: 0;
+            opacity: 0; /* Oculto hasta login */
         }
 
         #audio-control-btn:hover {
             background: #4a0404;
             transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
         }
 
         /* --- CONTENIDO DEL LIBRO --- */
+
         .book-scene {
             position: relative;
             width: var(--book-width);
             height: var(--book-height);
             transform-style: preserve-3d;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.6);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
             opacity: 0; 
             transform: scale(0.9);
             transition: opacity 2s ease, transform 2s ease;
@@ -203,15 +203,15 @@
             -webkit-backface-visibility: hidden;
             box-sizing: border-box;
             overflow: hidden;
-            border-radius: 0 6px 6px 0;
+            border-radius: 0 4px 4px 0;
             background-color: var(--page-color);
         }
 
         .back {
             transform: rotateY(180deg);
-            background-image: linear-gradient(to right, #d4c5a0, #f4e4bc 15%, #f4e4bc);
+            background-image: linear-gradient(to right, #e3d2a8, #f4e4bc 20%, #f4e4bc);
             border-left: 2px solid rgba(0,0,0,0.1);
-            box-shadow: inset 15px 0 30px rgba(0,0,0,0.15);
+            box-shadow: inset 10px 0 20px rgba(0,0,0,0.1);
         }
 
         /* --- ESTILOS DE LA TAPA --- */
@@ -220,229 +220,223 @@
         #p1 .front {
             background-color: var(--cover-color);
             background-image: linear-gradient(to right, #1a0000, #4a0404 15%, #4a0404);
-            border: 3px solid #1a0000;
-            box-shadow: inset 0 0 50px #000, 5px 5px 20px rgba(0,0,0,0.6);
+            border: 2px solid #1a0000;
+            box-shadow: inset 0 0 30px #000, 5px 5px 15px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: var(--gold);
-            padding: clamp(30px, 8%, 60px);
+            padding: clamp(20px, 5%, 40px); /* Padding adaptable */
         }
 
+        /* --- ELEMENTOS DECORATIVOS --- */
         .cover-border {
             position: absolute;
-            top: 25px; bottom: 25px; left: 25px; right: 25px;
-            border: 4px double var(--gold);
+            top: 20px; bottom: 20px; left: 20px; right: 20px;
+            border: 3px double var(--gold);
             pointer-events: none;
         }
         
         .corner-ornament {
             position: absolute;
-            width: clamp(40px, 10%, 70px);
-            height: clamp(40px, 10%, 70px);
-            border: 4px solid var(--gold);
+            width: clamp(30px, 8%, 50px);
+            height: clamp(30px, 8%, 50px);
+            border: 3px solid var(--gold);
             transition: all 0.3s;
         }
-        /* Esquinas */
-        .tl { top: 30px; left: 30px; border-right: none; border-bottom: none; border-radius: 8px 0 0 0; }
-        .tr { top: 30px; right: 30px; border-left: none; border-bottom: none; border-radius: 0 8px 0 0; }
-        .bl { bottom: 30px; left: 30px; border-right: none; border-top: none; border-radius: 0 0 0 8px; }
-        .br { bottom: 30px; right: 30px; border-left: none; border-top: none; border-radius: 0 0 8px 0; }
+        .tl { top: 25px; left: 25px; border-right: none; border-bottom: none; border-radius: 5px 0 0 0; }
+        .tr { top: 25px; right: 25px; border-left: none; border-bottom: none; border-radius: 0 5px 0 0; }
+        .bl { bottom: 25px; left: 25px; border-right: none; border-top: none; border-radius: 0 0 0 5px; }
+        .br { bottom: 25px; right: 25px; border-left: none; border-top: none; border-radius: 0 0 5px 0; }
 
         .center-ornament {
-            font-size: 4rem;
+            font-size: 2.5rem;
             color: var(--gold);
-            margin-bottom: 25px;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.6);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .book-title {
             font-family: 'Cinzel', serif;
             font-size: var(--font-size-title);
-            line-height: 1.1;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
-            margin-bottom: 15px;
-            letter-spacing: 3px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
             color: #ffcc00;
-            font-weight: 700;
             max-width: 90%;
         }
         
         .book-subtitle {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.2rem, 3vmin, 1.5rem);
+            font-size: clamp(1rem, 2.5vmin, 1.2rem);
             font-style: italic;
-            opacity: 0.95;
-            margin-top: 15px;
-            color: #e6c56a;
-            font-weight: 600;
+            opacity: 0.9;
+            margin-top: 10px;
+            color: #d4af37;
         }
 
-        /* --- ESTILOS INTERNOS --- */
+        /* --- ESTILOS INTERNOS (ADAPTADOS) --- */
         .paper-texture {
             background-color: var(--page-color);
-            /* Textura de papel mejorada */
             background-image: 
-                linear-gradient(to right, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 8%),
-                radial-gradient(circle, rgba(200, 180, 140, 0.3) 10%, transparent 10.5%),
-                radial-gradient(circle, rgba(200, 180, 140, 0.3) 10%, transparent 10.5%);
-            background-size: 100% 100%, 50px 50px, 80px 80px;
-            background-position: 0 0, 0 0, 25px 25px;
-            
-            padding: clamp(30px, 7%, 60px);
+                linear-gradient(to right, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 10%),
+                radial-gradient(circle, rgba(200, 180, 140, 0.4) 10%, transparent 10.5%),
+                radial-gradient(circle, rgba(200, 180, 140, 0.4) 10%, transparent 10.5%);
+            background-size: 100% 100%, 40px 40px, 70px 70px;
+            background-position: 0 0, 0 0, 20px 20px;
+            padding: clamp(20px, 5%, 40px); /* Padding dinámico */
             color: var(--text-color);
-            box-shadow: inset 0 0 30px rgba(139, 69, 19, 0.15);
+            box-shadow: inset 0 0 20px rgba(139, 69, 19, 0.1);
             
+            /* FLEXBOX PARA DISTRIBUCIÓN */
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; 
+            justify-content: flex-start; /* Empezar arriba */
+            
+            /* SCROLL SEGURO: Si el texto es muy largo para la pantalla, permite scroll dentro de la página */
             overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+            scrollbar-width: none; /* Ocultar scrollbar Firefox */
+            -ms-overflow-style: none; /* IE */
         }
         
-        .paper-texture::-webkit-scrollbar { width: 0; height: 0; }
+        /* Ocultar scrollbar Webkit */
+        .paper-texture::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
 
-        /* Z-Index */
-        #p2 { z-index: 11; }
+        /* Z-Index descendente */
+        #p2 { z-index: 11; } /* ÍNDICE */
         #p3 { z-index: 10; }
         #p4 { z-index: 9; }
         #p5 { z-index: 8; }
         #p6 { z-index: 7; }
         #p7 { z-index: 6; }
-        #p8 { z-index: 5; }
-        #p9 { z-index: 4; }
-        #p10 { z-index: 3; }
+        #p8 { z-index: 5; } /* WALTER */
+        #p9 { z-index: 4; } /* ST PARTE 1 */
+        #p10 { z-index: 3; } /* ST PARTE 2 */
         
         h2 {
             font-family: 'Cinzel', serif;
             text-align: center;
-            border-bottom: 2px solid rgba(68, 36, 24, 0.4);
-            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(44, 24, 16, 0.3);
+            padding-bottom: 10px;
             font-size: var(--font-size-h2);
-            color: #3e2723;
+            color: #5d4037;
             margin-top: 0;
-            font-weight: 700;
-            letter-spacing: 1px;
         }
 
         h3 {
             font-family:'Cinzel'; 
             text-align:center; 
-            font-size: clamp(1.1rem, 2.5vmin, 1.4rem); 
+            font-size: clamp(0.9rem, 2.2vmin, 1.1rem); 
             color:#8b0000; 
-            border-bottom: 2px solid #8b0000; 
-            padding-bottom: 8px;
-            margin-top: 15px;
-            font-weight: 600;
+            border-bottom:1px solid #8b0000; 
+            padding-bottom:5px;
+            margin-top: 10px;
         }
 
         .verse {
             font-size: var(--font-size-base);
-            line-height: 1.6; /* Mejor interlineado */
+            line-height: 1.5;
             text-align: justify;
-            margin-top: 20px;
-            font-weight: 600; /* Texto más grueso para mejor lectura */
-            color: #050200;   /* Negro casi puro */
+            margin-top: 15px;
         }
 
         .drop-cap {
             float: left;
             font-family: 'Cinzel', serif;
-            font-size: 3.5em;
+            font-size: 3.2em;
             line-height: 0.8;
-            padding-right: 12px;
-            padding-top: 6px;
+            padding-right: 8px;
+            padding-top: 4px;
             color: #8b0000;
-            font-weight: 700;
-            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
         }
 
         .verse-number {
             color: #8b0000;
-            font-weight: 900;
+            font-weight: bold;
             font-family: 'Cinzel', serif;
-            margin-right: 8px;
+            margin-right: 5px;
             font-size: 0.9em;
         }
 
         .divider {
             text-align: center;
-            margin: 25px 0;
-            color: #3e2723;
-            font-size: 1.8rem;
+            margin: 20px 0;
+            color: #5d4037;
+            font-size: 1.5rem;
             flex-shrink: 0;
-            font-weight: bold;
         }
 
         .flipped {
             transform: rotateY(-180deg);
         }
 
-        /* --- ÍNDICE --- */
+        /* --- ESTILOS DEL ÍNDICE --- */
         .index-list {
             list-style: none;
             padding: 0;
-            margin-top: 30px;
-            flex-grow: 1;
+            margin-top: 20px;
+            flex-grow: 1; /* Ocupar espacio disponible */
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
         
         .index-list li {
-            margin-bottom: clamp(15px, 4vmin, 30px);
+            margin-bottom: clamp(10px, 3vmin, 20px);
             text-align: center;
         }
         
         .index-btn {
             background: transparent;
             border: none;
-            color: #1a0a00;
+            color: #2c1810;
             font-family: 'Cinzel', serif;
-            font-size: clamp(1.2rem, 3vmin, 1.5rem);
+            font-size: clamp(1rem, 2.5vmin, 1.2rem);
             cursor: pointer;
-            padding: 8px 15px;
-            border-bottom: 2px solid transparent;
+            padding: 5px 10px;
+            border-bottom: 1px solid transparent;
             transition: all 0.3s;
-            white-space: normal;
-            font-weight: 700;
+            white-space: nowrap; /* Evitar que el texto rompa feo */
         }
         
         .index-btn:hover {
             color: #8b0000;
-            border-bottom: 2px solid #8b0000;
+            border-bottom: 1px solid #8b0000;
             transform: scale(1.05);
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            box-shadow: none;
+            background: transparent;
         }
         
-        .index-btn::before { content: none; }
+        .index-btn::before { content: none; } /* Quitar borde dorado de botones generales */
 
         /* --- CONTROLES --- */
         .controls {
             margin-top: clamp(20px, 5vh, 40px);
             display: flex;
-            gap: 20px;
+            gap: 15px;
             z-index: 100;
             opacity: 0;
             transition: opacity 2s ease;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Permitir que los botones bajen si no caben */
             justify-content: center;
         }
 
         button {
             background: #2a0a0a;
             color: var(--gold);
-            border: 2px solid var(--gold); /* Borde más grueso */
-            padding: 12px 25px;
+            border: 1px solid var(--gold);
+            padding: 10px 20px;
             font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
@@ -451,8 +445,8 @@
 
         button:hover {
             background: #4a0404;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.7);
         }
 
         button:active {
@@ -468,16 +462,17 @@
         button::before {
             content: '';
             position: absolute;
-            top: 3px; bottom: 3px; left: 3px; right: 3px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            top: 2px; bottom: 2px; left: 2px; right: 2px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         #readBtn { background: #4a0404; }
         #readBtn:hover { background: #6a0606; }
         
+        /* Botón de índice específico */
         #indexBtn {
             border-color: #8b0000;
-            color: #f0e0c0;
+            color: #e3d2a8;
         }
 
         .spine-shadow {
@@ -485,8 +480,8 @@
             left: 0;
             top: 0;
             bottom: 0;
-            width: 40px;
-            background: linear-gradient(to right, rgba(0,0,0,0.25), transparent);
+            width: 30px;
+            background: linear-gradient(to right, rgba(0,0,0,0.2), transparent);
             z-index: 10;
             pointer-events: none;
             opacity: 0;
@@ -516,9 +511,8 @@
     </div>
 
     <!-- AUDIO PLAYERS -->
-    <audio id="audioPlayer" loop preload="auto"></audio>
-    <!-- SFX con preload para evitar lag -->
-    <audio id="pageTurnAudio" src="https://res.cloudinary.com/dgycaxlug/video/upload/v1768096437/Turning_book_page_sound_effect_Pasando_p%C3%A1gina_de_libro_efecto_de_sonido_hub3rj.mp3" preload="auto"></audio>
+    <audio id="audioPlayer" loop></audio>
+    <audio id="pageTurnAudio" src="https://res.cloudinary.com/dgycaxlug/video/upload/v1768096437/Turning_book_page_sound_effect_Pasando_p%C3%A1gina_de_libro_efecto_de_sonido_hub3rj.mp3"></audio>
     
     <!-- BOTÓN CONTROL AUDIO -->
     <button id="audio-control-btn" onclick="toggleAudioState()">🔊</button>
@@ -550,15 +544,15 @@
                     <ul class="index-list">
                         <li>
                             <button class="index-btn" onclick="jumpToPage(3)">I. Frases del Insano</button>
-                            <div style="font-size: 0.9rem; font-style: italic; margin-top: 5px; color:#5d4037;">Sentencias y Revelaciones</div>
+                            <div style="font-size: 0.8rem; font-style: italic; margin-top: 5px;">Sentencias y Revelaciones</div>
                         </li>
                         <li>
                             <button class="index-btn" onclick="jumpToPage(8)">II. Escrituras de Walter</button>
-                            <div style="font-size: 0.9rem; font-style: italic; margin-top: 5px; color:#5d4037;">Profecías Ocultas</div>
+                            <div style="font-size: 0.8rem; font-style: italic; margin-top: 5px;">Profecías Ocultas</div>
                         </li>
                          <li>
                             <button class="index-btn" onclick="jumpToPage(9)">III. Escrituras de ST</button>
-                            <div style="font-size: 0.9rem; font-style: italic; margin-top: 5px; color:#5d4037;">Ecos del Código</div>
+                            <div style="font-size: 0.8rem; font-style: italic; margin-top: 5px;">Ecos del Código</div>
                         </li>
                     </ul>
                     <div class="divider">~ ⚜ ~</div>
@@ -654,7 +648,7 @@
                     <p class="verse">
                         <span class="drop-cap">H</span>e aquí las visiones de Walter, aquel que caminó entre los mundos y trajo palabras de los vientos antiguos.
                     </p>
-                    <p class="verse" style="font-style: italic; text-align: center; margin-top: 40px; font-weight:500;">
+                    <p class="verse" style="font-style: italic; text-align: center; margin-top: 40px;">
                         (Página reservada para futuras profecías)
                     </p>
                 </div>
@@ -743,17 +737,12 @@
             }
         }
 
-        // --- SOLUCIÓN AL BUG DE SONIDO ---
         function playTurnSound() {
-            // Clonar el nodo crea una nueva instancia de audio en memoria.
-            // Esto permite reproducir el mismo sonido múltiples veces solapadas.
+            // Reproducir sonido de hoja al pasar página
+            // CLONAMOS el nodo para que se puedan reproducir varios a la vez (spameable)
             const sound = pageTurnAudio.cloneNode();
-            sound.volume = 0.4; 
-            // Reproducir y olvidar. El recolector de basura limpiará el clon cuando termine.
-            sound.play().catch(e => {
-                // Los navegadores bloquean audio si no hubo interacción previa.
-                // Ignoramos el error silenciosamente.
-            });
+            sound.volume = 0.4; // Un poco más bajo que el 100%
+            sound.play().catch(e => {}); 
         }
 
         function checkMusic() {
@@ -863,8 +852,6 @@
 
         // --- FUNCIÓN DE SALTO (Navegación Mágica) ---
         function jumpToPage(targetPage) {
-            // FIX: APAGAR LECTURA AUTOMÁTICA AL SALTAR
-            autoRead = false; 
             stopSpeaking();
             clearInterval(jumpInterval); // Detener saltos previos
             
@@ -967,25 +954,29 @@
         }
 
         function goNext(fastMode = false) {
-            if (!fastMode) {
-                clearInterval(jumpInterval); // Detener auto-salto si el usuario interrumpe
-                // FIX: CUALQUIER INTERACCIÓN MANUAL DETIENE LA LECTURA AUTOMÁTICA
-                autoRead = false; 
-            }
+            if (!fastMode) clearInterval(jumpInterval); // Detener auto-salto si el usuario interrumpe
+
+            // Si el usuario cambia manualmente, paramos la lectura automática
+            // EXCEPCIÓN: Si isSpeaking y autoRead son true, asumimos que es el flujo automático
+            // Si el evento viene de un click (usuario), deberíamos parar autoRead.
+            // Para simplificar, si es fastMode es auto, si no, es manual.
+            if (!fastMode && !isSpeaking) autoRead = false; 
+            // Nota: Si el TTS está hablando y cambiamos manual, el stopSpeaking corta el audio y el onend no se dispara igual.
 
             // BLOQUEO ANTI-SPAM (Solo afecta clic manual, no fastMode)
             if (isAnimating && !fastMode) return;
             if (!fastMode) isAnimating = true;
 
             // Solo detener voz si NO es un avance automático de lectura
-            // Si venimos de autoRead (fastMode=false pero autoRead=true y venimos de onEnd), no paramos.
-            // Pero si el usuario hace click manual (!fastMode), paramos voz.
-            if (!fastMode && !autoRead) {
+            if (!autoRead || (autoRead && !isSpeaking && !fastMode)) {
                  stopSpeaking();
+            } else {
+                // Si es autoRead, stopSpeaking se llamó antes en el onend? No, onend llama a goNext.
+                // Aquí solo necesitamos asegurarnos que no se cancele el flujo futuro.
             }
             
             if (currentLocation < maxLocation) {
-                // SONIDO - Se reproduce en CADA salto para mejor feedback
+                // SONIDO
                 playTurnSound();
 
                 if (currentLocation === 1) openBook();
@@ -1014,11 +1005,9 @@
         }
 
         function goPrev(fastMode = false) {
-            if (!fastMode) {
-                clearInterval(jumpInterval); // Detener auto-salto si el usuario interrumpe
-                autoRead = false; // FIX: CUALQUIER INTERACCIÓN MANUAL DETIENE LA LECTURA AUTOMÁTICA
-            }
+            if (!fastMode) clearInterval(jumpInterval); // Detener auto-salto si el usuario interrumpe
 
+            autoRead = false; // Al volver atrás manual, cancelamos auto lectura
             stopSpeaking();
 
             // BLOQUEO ANTI-SPAM
