@@ -260,7 +260,7 @@
         }
 
         /* --- ESTILOS DE LA TAPA --- */
-        #p1 { z-index: 12; }
+        #p1 { z-index: 13; } /* Ajustado Z-Index máximo */
         
         #p1 .front {
             background-color: var(--cover-color);
@@ -351,15 +351,17 @@
             height: 0;
         }
 
-        #p2 { z-index: 11; }
-        #p3 { z-index: 10; }
-        #p4 { z-index: 9; }
-        #p5 { z-index: 8; }
-        #p6 { z-index: 7; }
-        #p7 { z-index: 6; }
-        #p8 { z-index: 5; }
-        #p9 { z-index: 4; }
-        #p10 { z-index: 3; }
+        /* Z-INDEX STACK CORREGIDO PARA 11 PAGINAS */
+        #p2 { z-index: 12; }
+        #p3 { z-index: 11; }
+        #p4 { z-index: 10; }
+        #p5 { z-index: 9; }
+        #p6 { z-index: 8; }
+        #p7 { z-index: 7; }
+        #p8 { z-index: 6; }
+        #p9 { z-index: 5; } /* Nueva página (Retrato) */
+        #p10 { z-index: 4; } /* Antigua ST Parte 1 */
+        #p11 { z-index: 3; } /* Antigua ST Parte 2 */
         
         h2 {
             font-family: 'Cinzel', serif;
@@ -416,6 +418,22 @@
             color: #5d4037;
             font-size: 2.2rem;
             flex-shrink: 0;
+        }
+
+        /* --- ESTILOS DEL RETRATO --- */
+        .walter-portrait {
+            display: block;
+            width: 85%;
+            margin: 10px auto 20px auto;
+            border: 4px double #5d4037;
+            border-radius: 4px;
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.4);
+            filter: sepia(0.5) contrast(1.1) brightness(0.9); /* Efecto antiguo */
+            transition: filter 0.5s;
+        }
+        
+        .walter-portrait:hover {
+            filter: sepia(0) contrast(1) brightness(1); /* Color al hover */
         }
 
         .flipped {
@@ -553,7 +571,8 @@
 
     <!-- AUDIO PLAYERS (SONIDO DE PÁGINA ELIMINADO) -->
     <audio id="audioPlayer" loop></audio>
-    <!-- <audio id="pageTurnAudio" src="..."></audio> ELIMINADO POR PETICIÓN -->
+    <!-- AUDIO DESBLOQUEO -->
+    <audio id="unlockAudio" src="https://res.cloudinary.com/dgycaxlug/video/upload/v1768100657/Efecto_de_sonido_de_impacto_de_suspenso_IV_pocitn.mp3"></audio>
     
     <!-- WRAPPER PARA CONTROLES DE AUDIO -->
     <div id="audio-wrapper">
@@ -593,7 +612,7 @@
                             <button class="index-btn" onclick="jumpToPage(8)">II. Escrituras de Walter</button>
                         </li>
                          <li>
-                            <button class="index-btn" onclick="jumpToPage(9)">III. Escrituras de ST</button>
+                            <button class="index-btn" onclick="jumpToPage(10)">III. Escrituras de ST</button>
                         </li>
                     </ul>
                     <div class="divider">~ ⚜ ~</div>
@@ -696,10 +715,28 @@
                 <div class="back"></div>
             </div>
 
+            <!-- PÁGINA 9 (Walter Retrato - NUEVA) -->
+            <div class="page" id="p9">
+                <div class="front paper-texture">
+                    <h3>El Rostro del Maestro</h3>
+                    
+                    <img src="https://res.cloudinary.com/dgycaxlug/image/upload/v1768100333/Gemini_Generated_Image_6gcvzf6gcvzf6gcv_1_wpd1ub.png" alt="Retrato de Walter" class="walter-portrait">
+                    
+                    <p class="verse" style="text-align: center; font-style: italic;">
+                        "No miréis solo la carne, sino el abismo que devuelve la mirada desde sus ojos."
+                    </p>
+                    
+                    <p class="verse">
+                        <span class="verse-number">14.</span> He aquí la efigie de aquel que camina entre las sombras, capturada en trazos de luz y tiempo; no para la vanidad del presente, sino como testigo mudo para las eras venideras.
+                    </p>
+                </div>
+                <div class="back"></div>
+            </div>
+
             <!-- SECCIÓN 3: ESCRITURAS DE ST -->
             
-            <!-- PÁGINA 9 (ST Intro Parte 1) -->
-            <div class="page" id="p9">
+            <!-- PÁGINA 10 (ST Intro Parte 1) -->
+            <div class="page" id="p10">
                 <div class="front paper-texture">
                     <h3>I. La Parábola del Pastel Prohibido (I)</h3>
                     
@@ -707,22 +744,22 @@
                         <span class="drop-cap">A</span>conteció en el tercer día del mes duodécimo, bajo el signo del invierno austral, que tras el amargo rechazo de las Damas de la Flor, la Hermandad Verdadera —conocida entre los sabios como la SoloGang— se congregó en el santuario de Walter. Juan, Isaac, y el mismo Walter aguardaban, mas la incertidumbre nublaba sus copas.
                     </p>
                     <p class="verse">
-                        <span class="verse-number">13.</span> Y he aquí que las puertas se abrieron para una invitada inesperada, llamada Loop, cuya presencia era un enigma. Entonces ST, viendo la duda en los ojos de sus hermanos, comprendió que el destino exigía un sacrificio de sangre y vino.
+                        <span class="verse-number">16.</span> Y he aquí que las puertas se abrieron para una invitada inesperada, llamada Loop, cuya presencia era un enigma. Entonces ST, viendo la duda en los ojos de sus hermanos, comprendió que el destino exigía un sacrificio de sangre y vino.
                     </p>
                 </div>
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 10 (ST Intro Parte 2) -->
-            <div class="page" id="p10">
+            <!-- PÁGINA 11 (ST Intro Parte 2) -->
+            <div class="page" id="p11">
                 <div class="front paper-texture">
                     <h3>I. La Parábola del Pastel Prohibido (II)</h3>
                     
                     <p class="verse">
-                        <span class="verse-number">14.</span> Así pues, ST bebió del cáliz del vértigo hasta embriagar su espíritu, despojándose de la vergüenza para ganar el favor de la recién llegada. Con lengua desatada y astucia de serpiente, forjó una alianza en el fuego de la embriaguez, abriendo el sendero para su hermano.
+                        <span class="verse-number">17.</span> Así pues, ST bebió del cáliz del vértigo hasta embriagar su espíritu, despojándose de la vergüenza para ganar el favor de la recién llegada. Con lengua desatada y astucia de serpiente, forjó una alianza en el fuego de la embriaguez, abriendo el sendero para su hermano.
                     </p>
                     <p class="verse">
-                        <span class="verse-number">15.</span> Y gracias a esta ofrenda, Walter pudo probar la dulzura del pastel prohibido sin estorbo alguno. ST, ahora el Soñador Inmortal, da testimonio eterno de que la misión fue consumada en gloria, y que el sacrificio de uno fue la victoria de todos.
+                        <span class="verse-number">18.</span> Y gracias a esta ofrenda, Walter pudo probar la dulzura del pastel prohibido sin estorbo alguno. ST, ahora el Soñador Inmortal, da testimonio eterno de que la misión fue consumada en gloria, y que el sacrificio de uno fue la victoria de todos.
                     </p>
                 </div>
                 <!-- Última página, reverso -->
@@ -789,9 +826,9 @@
             // Lógica de reproducción automática basada en la página
             let targetSrc = "";
 
-            if (currentLocation === 8) {
+            if (currentLocation === 8 || currentLocation === 9) { // AÑADIDA PAG 9
                 targetSrc = walterMusic;
-            } else if (currentLocation === 9 || currentLocation === 10) {
+            } else if (currentLocation === 10 || currentLocation === 11) { // ACTUALIZADO A 10 y 11
                 targetSrc = stMusic;
             }
 
@@ -835,6 +872,11 @@
             const sacredKey = part1 + part2 + part3;
 
             if (encodedInput === sacredKey) {
+                
+                // Play unlock sound here
+                const unlockSound = document.getElementById("unlockAudio");
+                if(unlockSound) unlockSound.play().catch(e => {});
+
                 overlay.style.opacity = "0";
                 setTimeout(() => {
                     overlay.style.display = "none";
@@ -863,7 +905,7 @@
 
         // --- LÓGICA DEL LIBRO ---
         let currentLocation = 1;
-        const numOfPages = 10;
+        const numOfPages = 11; // ACTUALIZADO A 11 PAGINAS
         const maxLocation = numOfPages + 1;
         let isAnimating = false;
         let jumpInterval = null;
@@ -931,14 +973,16 @@
                 textToRead = "El Libro del Insano. Evangelio de los Caídos.";
             } else if (currentLocation === 2) {
                 textToRead = "Tabla de contenidos.";
-            } else if (currentLocation >= 3 && currentLocation <= 8) { // MODIFICADO: Incluye página 8
+            } else if (currentLocation >= 3 && currentLocation <= 8) { 
                 const h2 = pageEl.querySelector('h2') ? pageEl.querySelector('h2').innerText : "";
                 const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
                 textToRead = h2 + ". " + verses;
-            } else if (currentLocation === 9) {
+            } else if (currentLocation === 9) { // NUEVA PAGINA 9
+                textToRead = "El Rostro del Maestro. No miréis solo la carne, sino el abismo que devuelve la mirada desde sus ojos. He aquí la efigie de aquel que camina entre las sombras, capturada en trazos de luz y tiempo; no para la vanidad del presente, sino como testigo mudo para las eras venideras.";
+            } else if (currentLocation === 10) { // ST PASA A 10
                  const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
                 textToRead = "Las Escrituras de ST. Parte Uno. " + verses;
-            } else if (currentLocation === 10) {
+            } else if (currentLocation === 11) { // ST PASA A 11
                  const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
                 textToRead = "Las Escrituras de ST. Parte Dos. " + verses;
             }
