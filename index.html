@@ -18,14 +18,14 @@
             
             --cover-color: #4a0404; 
             --page-color: #f4e4bc;
-            --text-color: #1a0f0a; /* Texto más oscuro para contraste */
+            --text-color: #000000; /* Texto negro puro para máximo contraste */
             --gold: #d4af37;
             --duration: 1.2s;
             
-            /* --- TIPOGRAFÍA MÁS GRANDE Y VISIBLE --- */
-            --font-size-base: clamp(1.1rem, 2.2vmin, 1.4rem); /* Ajuste leve para el nuevo ancho */
-            --font-size-h2: clamp(1.5rem, 3.5vmin, 2rem);
-            --font-size-title: clamp(2.2rem, 7vmin, 4rem);
+            /* --- TIPOGRAFÍA MÁS GRANDE Y VISIBLE (AUMENTADO) --- */
+            --font-size-base: clamp(1.4rem, 2.8vmin, 1.8rem); /* Mucho más grande */
+            --font-size-h2: clamp(1.8rem, 4.5vmin, 2.5rem);
+            --font-size-title: clamp(2.8rem, 9vmin, 5rem);
         }
 
         /* Ajustes específicos para móviles */
@@ -33,7 +33,7 @@
             :root {
                 --book-width: 90vw; /* Un poco menos de borde a borde */
                 --book-height: 80vh; /* Más alto en móvil */
-                --font-size-base: 1.15rem; 
+                --font-size-base: 1.3rem; /* Base sólida en móvil */
             }
             
             .book-scene {
@@ -334,7 +334,7 @@
         h3 {
             font-family:'Cinzel'; 
             text-align:center; 
-            font-size: clamp(1.1rem, 3vmin, 1.4rem); 
+            font-size: clamp(1.3rem, 3.5vmin, 1.6rem); /* Aumentado */
             color:#8b0000; 
             border-bottom:1px solid #8b0000; 
             padding-bottom:5px;
@@ -344,16 +344,16 @@
 
         .verse {
             font-size: var(--font-size-base);
-            line-height: 1.6;
+            line-height: 1.5; /* Ligeramente más compacto para que quepa */
             text-align: justify;
-            margin-top: 20px;
-            font-weight: 600; /* Texto más grueso para visibilidad */
+            margin-top: 15px;
+            font-weight: 700; /* Texto más grueso para visibilidad */
         }
 
         .drop-cap {
             float: left;
             font-family: 'Cinzel', serif;
-            font-size: 3.5em;
+            font-size: 3.2em;
             line-height: 0.8;
             padding-right: 10px;
             padding-top: 6px;
@@ -373,7 +373,7 @@
             text-align: center;
             margin: 20px 0;
             color: #5d4037;
-            font-size: 2rem;
+            font-size: 2.2rem;
             flex-shrink: 0;
         }
 
@@ -402,7 +402,7 @@
             border: none;
             color: #2c1810;
             font-family: 'Cinzel', serif;
-            font-size: clamp(1.2rem, 3vmin, 1.4rem); /* Índice más grande */
+            font-size: clamp(1.4rem, 3.5vmin, 1.7rem); /* Índice más grande */
             font-weight: bold;
             cursor: pointer;
             padding: 5px 10px;
