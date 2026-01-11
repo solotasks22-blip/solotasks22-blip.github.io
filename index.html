@@ -11,38 +11,33 @@
     
     <style>
         :root {
-            /* --- DIMENSIONES AJUSTADAS (FORMATO RECTANGULAR) --- */
-            /* Reducimos el ancho máximo y el porcentaje (de 50vw a 38vw) para que sea más estrecho */
-            --book-width: clamp(300px, 38vw, 600px);
-            /* Mantenemos la altura para que sea "alto" */
-            --book-height: clamp(480px, 75vh, 900px);
+            /* --- DIMENSIONES AJUSTADAS (MÁS ANGOSTO) --- */
+            /* Se ha reducido el ancho para que sea más rectangular (formato retrato) */
+            --book-width: clamp(300px, 40vw, 550px); 
+            --book-height: clamp(500px, 85vh, 900px);
             
             --cover-color: #4a0404; 
             --page-color: #f4e4bc;
-            --text-color: #1a0f0a;
+            --text-color: #1a0f0a; /* Texto más oscuro para contraste */
             --gold: #d4af37;
             --duration: 1.2s;
             
-            /* FUENTES (Ajustadas ligeramente para el ancho reducido) */
-            /* Mantenemos el tamaño grande pero ajustamos el clamp para que no rompa palabras en pantallas estrechas */
-            --font-size-base: clamp(1.2rem, 2.5vh, 1.5rem); 
-            --font-size-h2: clamp(1.6rem, 3.5vh, 2.2rem);
-            --font-size-title: clamp(2.5rem, 6vh, 4rem);
+            /* --- TIPOGRAFÍA MÁS GRANDE Y VISIBLE --- */
+            --font-size-base: clamp(1.1rem, 2.2vmin, 1.4rem); /* Ajuste leve para el nuevo ancho */
+            --font-size-h2: clamp(1.5rem, 3.5vmin, 2rem);
+            --font-size-title: clamp(2.2rem, 7vmin, 4rem);
         }
 
-        /* Ajustes para móviles */
-        @media (max-width: 768px) {
+        /* Ajustes específicos para móviles */
+        @media (max-width: 600px) {
             :root {
-                /* En móvil, el formato "rectangular" natural es la propia pantalla, 
-                   así que usamos casi todo el ancho disponible */
-                --book-width: 88vw; 
-                --book-height: 70vh; 
-                --font-size-base: 1.2rem;
+                --book-width: 90vw; /* Un poco menos de borde a borde */
+                --book-height: 80vh; /* Más alto en móvil */
+                --font-size-base: 1.15rem; 
             }
-            .spine-shadow { display: none; }
             
             .book-scene {
-                margin-top: -40px; 
+                margin-top: -20px; 
             }
         }
 
@@ -54,10 +49,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* Centrado vertical */
             font-family: 'Cormorant Garamond', serif;
             overflow: hidden;
-            perspective: 2000px;
+            perspective: 1500px;
         }
 
         /* --- PANTALLA DE BLOQUEO (LOGIN) --- */
@@ -142,14 +137,14 @@
             height: 20px;
         }
 
-        /* --- BOTÓN DE AUDIO (SIMPLE) --- */
+        /* --- BOTÓN DE AUDIO (MÁS PEQUEÑO) --- */
         #audio-control-btn {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             z-index: 5001;
-            width: 50px;
-            height: 50px;
+            width: 35px; /* Más pequeño */
+            height: 35px; /* Más pequeño */
             background: #2a0a0a;
             border: 1px solid var(--gold);
             border-radius: 50%;
@@ -158,7 +153,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 1rem;
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
             transition: all 0.3s;
             opacity: 0;
@@ -167,7 +162,6 @@
         #audio-control-btn:hover {
             background: #4a0404;
             transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
         }
 
         /* --- CONTENIDO DEL LIBRO --- */
@@ -181,6 +175,7 @@
             opacity: 0; 
             transform: scale(0.9);
             transition: opacity 2s ease, transform 2s ease;
+            margin-bottom: 10px; /* Separación mínima con botones */
         }
 
         .book {
@@ -224,7 +219,7 @@
         }
 
         /* --- ESTILOS DE LA TAPA --- */
-        #p1 { z-index: 14; }
+        #p1 { z-index: 12; }
         
         #p1 .front {
             background-color: var(--cover-color);
@@ -250,8 +245,8 @@
         
         .corner-ornament {
             position: absolute;
-            width: clamp(40px, 12%, 80px); /* Ajustado para ancho reducido */
-            height: clamp(40px, 12%, 80px);
+            width: clamp(30px, 8%, 50px);
+            height: clamp(30px, 8%, 50px);
             border: 3px solid var(--gold);
             transition: all 0.3s;
         }
@@ -261,7 +256,7 @@
         .br { bottom: 25px; right: 25px; border-left: none; border-top: none; border-radius: 0 0 5px 0; }
 
         .center-ornament {
-            font-size: 4rem;
+            font-size: 3rem; /* Más grande */
             color: var(--gold);
             margin-bottom: 20px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
@@ -272,21 +267,20 @@
             font-size: var(--font-size-title);
             line-height: 1.1;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             letter-spacing: 3px;
             color: #ffcc00;
-            max-width: 90%;
+            max-width: 95%;
             font-weight: 900;
         }
         
         .book-subtitle {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.4rem, 3.5vh, 2rem);
+            font-size: clamp(1.2rem, 3vmin, 1.5rem);
             font-style: italic;
-            opacity: 0.95;
-            margin-top: 15px;
-            color: #e6c256;
-            font-weight: 600;
+            opacity: 0.9;
+            margin-top: 10px;
+            color: #d4af37;
         }
 
         /* --- ESTILOS INTERNOS (ADAPTADOS) --- */
@@ -298,7 +292,7 @@
                 radial-gradient(circle, rgba(200, 180, 140, 0.4) 10%, transparent 10.5%);
             background-size: 100% 100%, 40px 40px, 70px 70px;
             background-position: 0 0, 0 0, 20px 20px;
-            padding: clamp(25px, 5%, 50px);
+            padding: clamp(25px, 6%, 50px);
             color: var(--text-color);
             box-shadow: inset 0 0 20px rgba(139, 69, 19, 0.1);
             
@@ -316,73 +310,70 @@
             height: 0;
         }
 
-        /* Z-Index descendente (11 páginas + tapa) */
-        #p2 { z-index: 13; }
-        #p3 { z-index: 12; }
-        #p4 { z-index: 11; }
-        #p5 { z-index: 10; }
-        #p6 { z-index: 9; }
-        #p7 { z-index: 8; }
-        #p8 { z-index: 7; }
-        #p9 { z-index: 6; }
-        #p10 { z-index: 5; }
-        #p11 { z-index: 4; } 
+        #p2 { z-index: 11; }
+        #p3 { z-index: 10; }
+        #p4 { z-index: 9; }
+        #p5 { z-index: 8; }
+        #p6 { z-index: 7; }
+        #p7 { z-index: 6; }
+        #p8 { z-index: 5; }
+        #p9 { z-index: 4; }
+        #p10 { z-index: 3; }
         
         h2 {
             font-family: 'Cinzel', serif;
             text-align: center;
-            border-bottom: 3px solid rgba(44, 24, 16, 0.4); 
-            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(44, 24, 16, 0.3);
+            padding-bottom: 12px;
             font-size: var(--font-size-h2);
             color: #4a2c22;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            font-weight: 700;
+            margin-top: 5px;
+            font-weight: 800; /* Más negrita */
         }
 
         h3 {
             font-family:'Cinzel'; 
             text-align:center; 
-            font-size: clamp(1.4rem, 3vh, 1.8rem); 
+            font-size: clamp(1.1rem, 3vmin, 1.4rem); 
             color:#8b0000; 
-            border-bottom:2px solid #8b0000; 
-            padding-bottom:10px;
-            margin-top: 15px;
+            border-bottom:1px solid #8b0000; 
+            padding-bottom:5px;
+            margin-top: 10px;
             font-weight: 700;
         }
 
         .verse {
             font-size: var(--font-size-base);
-            line-height: 1.5;
+            line-height: 1.6;
             text-align: justify;
-            margin-top: 25px;
-            font-weight: 600;
+            margin-top: 20px;
+            font-weight: 600; /* Texto más grueso para visibilidad */
         }
 
         .drop-cap {
             float: left;
             font-family: 'Cinzel', serif;
-            font-size: 3em; 
+            font-size: 3.5em;
             line-height: 0.8;
-            padding-right: 15px;
+            padding-right: 10px;
             padding-top: 6px;
             color: #8b0000;
-            font-weight: 900;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
         }
 
         .verse-number {
             color: #8b0000;
             font-weight: 900;
             font-family: 'Cinzel', serif;
-            margin-right: 8px;
-            font-size: 1em;
+            margin-right: 5px;
+            font-size: 1.1em;
         }
 
         .divider {
             text-align: center;
-            margin: 30px 0;
+            margin: 20px 0;
             color: #5d4037;
-            font-size: 2.5rem;
+            font-size: 2rem;
             flex-shrink: 0;
         }
 
@@ -402,22 +393,22 @@
         }
         
         .index-list li {
-            margin-bottom: clamp(15px, 3.5vh, 30px);
+            margin-bottom: clamp(15px, 4vmin, 25px);
             text-align: center;
         }
         
         .index-btn {
             background: transparent;
             border: none;
-            color: #1a0f0a;
+            color: #2c1810;
             font-family: 'Cinzel', serif;
-            font-size: clamp(1.2rem, 2.5vh, 1.6rem);
-            font-weight: 700;
+            font-size: clamp(1.2rem, 3vmin, 1.4rem); /* Índice más grande */
+            font-weight: bold;
             cursor: pointer;
             padding: 5px 10px;
-            border-bottom: 2px solid transparent;
+            border-bottom: 1px solid transparent;
             transition: all 0.3s;
-            white-space: nowrap;
+            white-space: normal; /* Permitir saltos de línea si es necesario */
         }
         
         .index-btn:hover {
@@ -429,81 +420,67 @@
         
         .index-btn::before { content: none; }
 
-        /* --- CONTROLES --- */
+        /* --- CONTROLES (BOTONES PEQUEÑOS) --- */
         .controls {
-            position: fixed;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
+            /* Posición ajustada para no tapar */
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
             display: flex;
-            gap: 20px;
+            gap: 10px;
             z-index: 100;
             opacity: 0;
             transition: opacity 2s ease;
-            flex-wrap: wrap; 
+            flex-wrap: wrap;
             justify-content: center;
-            width: 95%;
-            pointer-events: none;
-        }
-        
-        .controls button {
-            pointer-events: auto;
+            pointer-events: none; /* Dejar pasar clicks fuera de los botones */
         }
 
-        button {
-            background: #2a0a0a;
+        /* Botones específicos de control */
+        .ctrl-btn {
+            pointer-events: auto; /* Reactivar clicks en los botones */
+            background: rgba(42, 10, 10, 0.9); /* Un poco transparente */
             color: var(--gold);
             border: 1px solid var(--gold);
-            padding: 14px 28px;
+            padding: 6px 12px; /* PADDING REDUCIDO */
             font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-size: 0.75rem; /* FUENTE MÁS PEQUEÑA */
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
             overflow: hidden;
+            min-width: 80px; /* Ancho mínimo reducido */
+            border-radius: 4px;
         }
 
-        button:hover {
+        .ctrl-btn:hover {
             background: #4a0404;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+            transform: translateY(-2px);
         }
 
-        button:active {
+        .ctrl-btn:active {
             transform: translateY(0);
         }
 
-        button:disabled {
-            opacity: 0.5;
+        .ctrl-btn:disabled {
+            opacity: 0.4;
             cursor: not-allowed;
             transform: none;
+            border-color: #5d4037;
         }
 
-        button::before {
-            content: '';
-            position: absolute;
-            top: 2px; bottom: 2px; left: 2px; right: 2px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        #readBtn { background: #4a0404; }
-        #readBtn:hover { background: #6a0606; }
-        
-        #indexBtn {
-            border-color: #8b0000;
-            color: #e3d2a8;
-        }
+        #readBtn { background: rgba(74, 4, 4, 0.9); }
+        #indexBtn { border-color: #8b0000; color: #e3d2a8; }
 
         .spine-shadow {
             position: absolute;
             left: 0;
             top: 0;
             bottom: 0;
-            width: 50px;
+            width: 40px;
             background: linear-gradient(to right, rgba(0,0,0,0.3), transparent);
             z-index: 10;
             pointer-events: none;
@@ -524,7 +501,7 @@
         <div class="seal-container">
             <div class="center-ornament">⚜</div>
             <div class="seal-title">Sello Arcano</div>
-            <p style="color: #aa8888; font-style: italic; margin-bottom: 20px; font-size: 1.2rem;">Pronuncia la llave oculta</p>
+            <p style="color: #aa8888; font-style: italic; margin-bottom: 20px;">Pronuncia la llave oculta</p>
             
             <input type="password" id="passwordInput" class="seal-input" placeholder="***" onkeypress="handleEnter(event)">
             
@@ -533,8 +510,9 @@
         </div>
     </div>
 
-    <!-- AUDIO PLAYER -->
+    <!-- AUDIO PLAYERS (SONIDO DE PÁGINA ELIMINADO) -->
     <audio id="audioPlayer" loop></audio>
+    <!-- <audio id="pageTurnAudio" src="..."></audio> ELIMINADO POR PETICIÓN -->
     
     <!-- BOTÓN CONTROL AUDIO -->
     <button id="audio-control-btn" onclick="toggleAudioState()">🔊</button>
@@ -566,15 +544,12 @@
                     <ul class="index-list">
                         <li>
                             <button class="index-btn" onclick="jumpToPage(3)">I. Frases del Insano</button>
-                            <div style="font-size: 1.1rem; font-style: italic; margin-top: 5px; font-weight: 600;">Sentencias y Revelaciones</div>
                         </li>
                         <li>
                             <button class="index-btn" onclick="jumpToPage(8)">II. Escrituras de Walter</button>
-                            <div style="font-size: 1.1rem; font-style: italic; margin-top: 5px; font-weight: 600;">Profecías Ocultas</div>
                         </li>
                          <li>
                             <button class="index-btn" onclick="jumpToPage(9)">III. Escrituras de ST</button>
-                            <div style="font-size: 1.1rem; font-style: italic; margin-top: 5px; font-weight: 600;">Ecos del Código</div>
                         </li>
                     </ul>
                     <div class="divider">~ ⚜ ~</div>
@@ -584,7 +559,7 @@
 
             <!-- SECCIÓN 1: FRASES DEL INSANO -->
             
-            <!-- PÁGINA 3 -->
+            <!-- PÁGINA 3 (Rubias) -->
             <div class="page" id="p3">
                 <div class="front paper-texture">
                     <h2>I. De la Luz Engañosa</h2>
@@ -599,7 +574,7 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 4 -->
+            <!-- PÁGINA 4 (Negros) -->
             <div class="page" id="p4">
                 <div class="front paper-texture">
                     <h2>II. De la Estirpe Oscura</h2>
@@ -616,7 +591,7 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 5 -->
+            <!-- PÁGINA 5 (Mañanas) -->
             <div class="page" id="p5">
                 <div class="front paper-texture">
                     <h2>III. La Paradoja Helada</h2>
@@ -631,7 +606,7 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 6 -->
+            <!-- PÁGINA 6 (Chispas) -->
             <div class="page" id="p6">
                 <div class="front paper-texture">
                     <h2>IV. La Semilla del Fuego</h2>
@@ -646,7 +621,7 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 7 -->
+            <!-- PÁGINA 7 (Velo) -->
             <div class="page" id="p7">
                 <div class="front paper-texture">
                     <h2>V. El Velo de la Carne</h2>
@@ -662,7 +637,7 @@
 
             <!-- SECCIÓN 2: ESCRITURAS DE WALTER -->
             
-            <!-- PÁGINA 8 -->
+            <!-- PÁGINA 8 (Walter Intro) -->
             <div class="page" id="p8">
                 <div class="front paper-texture">
                     <h2>Las Escrituras de Walter</h2>
@@ -670,55 +645,45 @@
                     <p class="verse">
                         <span class="drop-cap">H</span>e aquí las visiones de Walter, aquel que caminó entre los mundos y trajo palabras de los vientos antiguos.
                     </p>
-                    <p class="verse" style="font-style: italic; text-align: center; margin-top: 40px; font-weight: 600;">
+                    <p class="verse" style="font-style: italic; text-align: center; margin-top: 40px;">
                         (Página reservada para futuras profecías)
                     </p>
                 </div>
                 <div class="back"></div>
             </div>
 
-            <!-- SECCIÓN 3: ESCRITURAS DE ST (Dividido en 3 partes ahora) -->
+            <!-- SECCIÓN 3: ESCRITURAS DE ST -->
             
-            <!-- PÁGINA 9 (ST Parte 1) -->
+            <!-- PÁGINA 9 (ST Intro Parte 1) -->
             <div class="page" id="p9">
                 <div class="front paper-texture">
-                    <h3>I. La Parábola del Pastel (I)</h3>
+                    <h3>I. La Parábola del Pastel Prohibido (I)</h3>
                     
                     <p class="verse">
                         <span class="drop-cap">A</span>conteció en el tercer día del mes duodécimo, bajo el signo del invierno austral, que tras el amargo rechazo de las Damas de la Flor, la Hermandad Verdadera —conocida entre los sabios como la SoloGang— se congregó en el santuario de Walter. Juan, Isaac, y el mismo Walter aguardaban, mas la incertidumbre nublaba sus copas.
                     </p>
-                </div>
-                <div class="back"></div>
-            </div>
-
-            <!-- PÁGINA 10 (ST Parte 2) -->
-            <div class="page" id="p10">
-                <div class="front paper-texture">
-                    <h3>I. La Parábola del Pastel (II)</h3>
                     <p class="verse">
                         <span class="verse-number">13.</span> Y he aquí que las puertas se abrieron para una invitada inesperada, llamada Loop, cuya presencia era un enigma. Entonces ST, viendo la duda en los ojos de sus hermanos, comprendió que el destino exigía un sacrificio de sangre y vino.
                     </p>
-                     <p class="verse">
-                        <span class="verse-number">14.</span> Así pues, ST bebió del cáliz del vértigo hasta embriagar su espíritu, despojándose de la vergüenza para ganar el favor de la recién llegada.
-                    </p>
                 </div>
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 11 (ST Parte 3 - FINAL) -->
-            <div class="page" id="p11">
+            <!-- PÁGINA 10 (ST Intro Parte 2) -->
+            <div class="page" id="p10">
                 <div class="front paper-texture">
-                    <h3>I. La Parábola del Pastel (III)</h3>
+                    <h3>I. La Parábola del Pastel Prohibido (II)</h3>
+                    
                     <p class="verse">
-                        <span class="verse-number">15.</span> Con lengua desatada y astucia de serpiente, forjó una alianza en el fuego de la embriaguez, abriendo el sendero para su hermano.
+                        <span class="verse-number">14.</span> Así pues, ST bebió del cáliz del vértigo hasta embriagar su espíritu, despojándose de la vergüenza para ganar el favor de la recién llegada. Con lengua desatada y astucia de serpiente, forjó una alianza en el fuego de la embriaguez, abriendo el sendero para su hermano.
                     </p>
                     <p class="verse">
-                        <span class="verse-number">16.</span> Y gracias a esta ofrenda, Walter pudo probar la dulzura del pastel prohibido sin estorbo alguno. ST, ahora el Soñador Inmortal, da testimonio eterno de que la misión fue consumada en gloria.
+                        <span class="verse-number">15.</span> Y gracias a esta ofrenda, Walter pudo probar la dulzura del pastel prohibido sin estorbo alguno. ST, ahora el Soñador Inmortal, da testimonio eterno de que la misión fue consumada en gloria, y que el sacrificio de uno fue la victoria de todos.
                     </p>
                 </div>
                 <!-- Última página, reverso -->
                 <div class="back" style="background-color: var(--cover-color); background-image: none; display: flex; align-items: center; justify-content: center;">
-                    <p style="color: rgba(212, 175, 55, 0.5); font-family: 'Cinzel'; transform: rotateY(180deg); font-size: 2.5rem; font-weight: 900;">FINIS</p>
+                    <p style="color: rgba(212, 175, 55, 0.5); font-family: 'Cinzel'; transform: rotateY(180deg); font-size: 2rem;">FINIS</p>
                 </div>
             </div>
             
@@ -727,19 +692,22 @@
     </div>
 
     <div class="controls" id="controls">
-        <button id="prevBtn" onclick="goPrev()">Anterior</button>
-        <button id="readBtn" onclick="toggleReading()">Leer Página</button>
-        <button id="indexBtn" onclick="jumpToPage(2)">Índice</button>
-        <button id="nextBtn" onclick="goNext()">Siguiente</button>
+        <button class="ctrl-btn" id="prevBtn" onclick="goPrev()">Anterior</button>
+        <button class="ctrl-btn" id="readBtn" onclick="toggleReading()">Leer</button>
+        <button class="ctrl-btn" id="indexBtn" onclick="jumpToPage(2)">Índice</button>
+        <button class="ctrl-btn" id="nextBtn" onclick="goNext()">Siguiente</button>
     </div>
 
     <script>
         // --- LOGICA DE AUDIO ---
         const audioPlayer = document.getElementById('audioPlayer');
+        // const pageTurnAudio Eliminado
         const audioBtn = document.getElementById('audio-control-btn');
         
+        // Volumen bajo
         audioPlayer.volume = 0.2;
 
+        // URLs de Audio
         const walterMusic = "https://res.cloudinary.com/dgycaxlug/video/upload/v1768096299/Gymnop%C3%A9die_No.1_eyoohq.mp3";
         const stMusic = "https://res.cloudinary.com/dgycaxlug/video/upload/v1768096310/Una_melodia_muy_simple_pero_muy_triste_Synthesia_o0vrsm.mp3";
         
@@ -764,12 +732,18 @@
             }
         }
 
+        function playTurnSound() {
+            // FUNCIÓN VACÍA: SE HAN QUITADO LOS SONIDOS
+            return; 
+        }
+
         function checkMusic() {
+            // Lógica de reproducción automática basada en la página
             let targetSrc = "";
 
             if (currentLocation === 8) {
                 targetSrc = walterMusic;
-            } else if (currentLocation >= 9 && currentLocation <= 11) { // Rango ampliado para ST
+            } else if (currentLocation === 9 || currentLocation === 10) {
                 targetSrc = stMusic;
             }
 
@@ -797,7 +771,7 @@
             }
         }
 
-        // --- SISTEMA DE SEGURIDAD ---
+        // --- SISTEMA DE SEGURIDAD (OFUSCADO) ---
         function checkSeal() {
             const input = document.getElementById("passwordInput").value;
             const errorMsg = document.getElementById("errorMsg");
@@ -820,6 +794,7 @@
                     bookScene.style.transform = "scale(1)";
                     controls.style.opacity = "1";
                     musicToggleBtn.style.opacity = "1";
+                    
                     checkMusic(); 
                 }, 1500);
             } else {
@@ -840,7 +815,7 @@
 
         // --- LÓGICA DEL LIBRO ---
         let currentLocation = 1;
-        const numOfPages = 11; // AUMENTADO A 11
+        const numOfPages = 10;
         const maxLocation = numOfPages + 1;
         let isAnimating = false;
         let jumpInterval = null;
@@ -870,13 +845,14 @@
             if (targetPage > currentLocation) {
                 jumpInterval = setInterval(() => {
                     if (currentLocation < targetPage) {
-                        goNext(true); 
+                        goNext(true);
                     } else {
                         clearInterval(jumpInterval);
                         checkMusic();
                     }
                 }, 150);
-            } else {
+            } 
+            else {
                 jumpInterval = setInterval(() => {
                     if (currentLocation > targetPage) {
                         goPrev(true);
@@ -894,6 +870,7 @@
                 stopSpeaking();
                 return;
             }
+
             autoRead = true;
             readCurrentPage();
         }
@@ -913,19 +890,17 @@
             } else if (currentLocation === 8) {
                 textToRead = "Las Escrituras de Walter. He aquí las visiones de Walter.";
             } else if (currentLocation === 9) {
-                textToRead = "Las Escrituras de ST. Parte Uno. Aconteció en el tercer día del mes duodécimo...";
+                 const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
+                textToRead = "Las Escrituras de ST. Parte Uno. " + verses;
             } else if (currentLocation === 10) {
-                textToRead = "Las Escrituras de ST. Parte Dos. Y he aquí que las puertas se abrieron...";
-            } else if (currentLocation === 11) {
-                textToRead = "Las Escrituras de ST. Parte Tres. Con lengua desatada y astucia de serpiente...";
-            } else if (currentLocation === 12) {
-                textToRead = "Fin del libro.";
+                 const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
+                textToRead = "Las Escrituras de ST. Parte Dos. " + verses;
             }
 
             if (textToRead) {
                 const utterance = new SpeechSynthesisUtterance(textToRead);
                 utterance.lang = 'es-ES';
-                utterance.rate = 0.8;
+                utterance.rate = 0.9;
                 utterance.pitch = 0.8;
                 
                 utterance.onend = function() {
@@ -935,14 +910,14 @@
                             if (autoRead) readCurrentPage();
                         }, 1300);
                     } else {
-                        readBtn.innerText = "Leer Página";
+                        readBtn.innerText = "Leer";
                         isSpeaking = false;
                         autoRead = false;
                     }
                 };
 
                 synth.speak(utterance);
-                readBtn.innerText = "Detener Voz";
+                readBtn.innerText = "Parar";
                 isSpeaking = true;
             }
         }
@@ -950,7 +925,7 @@
         function stopSpeaking() {
             if (synth.speaking) {
                 synth.cancel();
-                readBtn.innerText = "Leer Página";
+                readBtn.innerText = "Leer";
                 isSpeaking = false;
             }
         }
@@ -958,6 +933,7 @@
         function goNext(fastMode = false) {
             if (!fastMode) clearInterval(jumpInterval);
             if (!fastMode && !isSpeaking) autoRead = false; 
+
             if (isAnimating && !fastMode) return;
             if (!fastMode) isAnimating = true;
 
@@ -966,6 +942,7 @@
             }
             
             if (currentLocation < maxLocation) {
+                // NO SOUND HERE
                 if (currentLocation === 1) openBook();
                 
                 const currPage = pages[currentLocation];
@@ -981,7 +958,7 @@
                 
                 currentLocation++;
                 if(!fastMode) updateButtons();
-                if(!fastMode) checkMusic(); 
+                if(!fastMode) checkMusic();
 
                 if (!fastMode) setTimeout(() => { isAnimating = false; }, 1200);
             } else {
@@ -991,29 +968,33 @@
 
         function goPrev(fastMode = false) {
             if (!fastMode) clearInterval(jumpInterval);
-            autoRead = false; 
+
+            autoRead = false;
             stopSpeaking();
 
             if (isAnimating && !fastMode) return;
             if (!fastMode) isAnimating = true;
             
             if (currentLocation > 1) {
+                // NO SOUND HERE
                 currentLocation--;
+                
                 const prevPage = pages[currentLocation];
+                
                 if (currentLocation === numOfPages) openBook();
 
                 if (prevPage) {
-                    // Ajuste dinámico Z-Index
-                    prevPage.style.zIndex = (numOfPages + 5) - currentLocation; 
+                    prevPage.style.zIndex = (numOfPages + 3) - currentLocation; 
                     
                     if (currentLocation === 1) {
                          setTimeout(() => { closeBook(true); }, fastMode ? 50 : 200);
                     }
+
                     prevPage.classList.remove("flipped");
                 }
                 
                 if(!fastMode) updateButtons();
-                if(!fastMode) checkMusic(); 
+                if(!fastMode) checkMusic();
 
                 if (!fastMode) setTimeout(() => { isAnimating = false; }, 1200);
             } else {
