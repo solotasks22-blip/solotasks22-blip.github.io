@@ -643,10 +643,10 @@
                     <h2>Las Escrituras de Walter</h2>
                     <div class="divider">✦</div>
                     <p class="verse">
-                        <span class="drop-cap">H</span>e aquí las visiones de Walter, aquel que caminó entre los mundos y trajo palabras de los vientos antiguos.
+                        <span class="drop-cap">H</span>e aquí que abro ante vosotros las puertas de este santuario, donde convergen los ríos del pensamiento antiguo y los mares de la realidad tangible. No son meras palabras las que aquí yacen, sino el eco de filosofías que susurran en la oscuridad y ciencias que desafían la razón del necio.
                     </p>
-                    <p class="verse" style="font-style: italic; text-align: center; margin-top: 40px;">
-                        (Página reservada para futuras profecías)
+                    <p class="verse">
+                        <span class="verse-number">13.</span> Acercaos, hijos de la duda, y bebed de las anécdotas que se tornan verdades y de las verdades que se disfrazan de sueños; pues ciertamente, de mi propia mano y espíritu fluyen estos testimonios. Yo, Walter, tejo este velo de tinta para instruir al que busca la luz y cegar al que solo mira la superficie.
                     </p>
                 </div>
                 <div class="back"></div>
@@ -883,12 +883,10 @@
                 textToRead = "El Libro del Insano. Evangelio de los Caídos.";
             } else if (currentLocation === 2) {
                 textToRead = "Tabla de contenidos.";
-            } else if (currentLocation >= 3 && currentLocation < 8) {
+            } else if (currentLocation >= 3 && currentLocation <= 8) { // MODIFICADO: Incluye página 8
                 const h2 = pageEl.querySelector('h2') ? pageEl.querySelector('h2').innerText : "";
                 const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
                 textToRead = h2 + ". " + verses;
-            } else if (currentLocation === 8) {
-                textToRead = "Las Escrituras de Walter. He aquí las visiones de Walter.";
             } else if (currentLocation === 9) {
                  const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
                 textToRead = "Las Escrituras de ST. Parte Uno. " + verses;
