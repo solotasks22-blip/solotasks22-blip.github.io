@@ -123,6 +123,90 @@
             height: 20px;
         }
 
+        /* --- BOTÓN TOGGLE MÚSICA (NUEVO) --- */
+        #music-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 5001; /* Encima del contenedor de música */
+            width: 40px;
+            height: 40px;
+            background: #2a0a0a;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s;
+            opacity: 0; /* Oculto hasta login */
+        }
+
+        #music-toggle-btn:hover {
+            background: #4a0404;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        /* --- REPRODUCTOR DE MÚSICA (ORBE) --- */
+        #music-container {
+            position: fixed;
+            top: 70px; /* Debajo del botón */
+            right: 20px;
+            width: 200px;
+            z-index: 5000;
+            opacity: 0; /* Oculto inicialmente */
+            pointer-events: none; /* No clickable cuando oculto */
+            transform: translateY(-20px);
+            transition: all 0.5s ease;
+            background: rgba(20, 0, 0, 0.8);
+            border: 2px double var(--gold);
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        /* Clase para mostrar el reproductor */
+        #music-container.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        #player {
+            width: 100%;
+            height: 112px;
+            border-radius: 2px;
+            border: 1px solid #2c1810;
+        }
+
+        .music-controls {
+            margin-top: 5px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .music-btn {
+            background: #2a0a0a;
+            color: var(--gold);
+            border: 1px solid #5d4037;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            cursor: pointer;
+            padding: 2px 8px;
+            text-transform: uppercase;
+        }
+        
+        .music-btn:hover {
+            background: #4a0404;
+            border-color: var(--gold);
+        }
+
         /* --- CONTENIDO DEL LIBRO --- */
 
         .book-scene {
@@ -177,7 +261,7 @@
         }
 
         /* --- ESTILOS DE LA TAPA --- */
-        #p1 { z-index: 10; }
+        #p1 { z-index: 11; }
         
         #p1 .front {
             background-color: var(--cover-color);
@@ -254,13 +338,14 @@
         }
 
         /* Z-Index descendente */
-        #p2 { z-index: 9; } /* ÍNDICE */
-        #p3 { z-index: 8; }
-        #p4 { z-index: 7; }
-        #p5 { z-index: 6; }
-        #p6 { z-index: 5; }
-        #p7 { z-index: 4; }
-        #p8 { z-index: 3; } /* WALTER */
+        #p2 { z-index: 10; } /* ÍNDICE */
+        #p3 { z-index: 9; }
+        #p4 { z-index: 8; }
+        #p5 { z-index: 7; }
+        #p6 { z-index: 6; }
+        #p7 { z-index: 5; }
+        #p8 { z-index: 4; } /* WALTER */
+        #p9 { z-index: 3; } /* ST */
         
         h2 {
             font-family: 'Cinzel', serif;
@@ -311,11 +396,11 @@
         .index-list {
             list-style: none;
             padding: 0;
-            margin-top: 30px;
+            margin-top: 20px;
         }
         
         .index-list li {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-align: center;
         }
         
@@ -417,6 +502,8 @@
         }
 
     </style>
+    <!-- API DE YOUTUBE -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 
@@ -431,6 +518,18 @@
             
             <button class="seal-btn" onclick="checkSeal()">Romper Sello</button>
             <div class="error-msg" id="errorMsg">La llave es incorrecta</div>
+        </div>
+    </div>
+
+    <!-- BOTÓN DESPLEGABLE DE MÚSICA -->
+    <button id="music-toggle-btn" onclick="toggleMusicPlayer()">♫</button>
+
+    <!-- REPRODUCTOR DE MÚSICA -->
+    <div id="music-container">
+        <!-- El div donde se inyectará el iframe de YouTube -->
+        <div id="player"></div>
+        <div class="music-controls">
+            <button class="music-btn" onclick="toggleMute()">Silenciar / Activar</button>
         </div>
     </div>
 
@@ -454,7 +553,7 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 2: ÍNDICE (NUEVO) -->
+            <!-- PÁGINA 2: ÍNDICE -->
             <div class="page" id="p2">
                 <div class="front paper-texture">
                     <h2>Tabla de Contenidos</h2>
@@ -466,6 +565,10 @@
                         <li>
                             <button class="index-btn" onclick="jumpToPage(8)">II. Escrituras de Walter</button>
                             <div style="font-size: 0.8rem; font-style: italic; margin-top: 5px;">Profecías Ocultas</div>
+                        </li>
+                         <li>
+                            <button class="index-btn" onclick="jumpToPage(9)">III. Escrituras de ST</button>
+                            <div style="font-size: 0.8rem; font-style: italic; margin-top: 5px;">Ecos del Código</div>
                         </li>
                     </ul>
                     <div class="divider">~ ⚜ ~</div>
@@ -551,7 +654,7 @@
                 <div class="back"></div>
             </div>
 
-            <!-- SECCIÓN 2: ESCRITURAS DE WALTER (NUEVO) -->
+            <!-- SECCIÓN 2: ESCRITURAS DE WALTER -->
             
             <!-- PÁGINA 8 (Walter Intro) -->
             <div class="page" id="p8">
@@ -563,6 +666,27 @@
                     </p>
                     <p class="verse" style="font-style: italic; text-align: center; margin-top: 40px;">
                         (Página reservada para futuras profecías)
+                    </p>
+                </div>
+                <div class="back"></div>
+            </div>
+
+            <!-- SECCIÓN 3: ESCRITURAS DE ST (NUEVO TEXTO) -->
+            
+            <!-- PÁGINA 9 (ST Intro) -->
+            <div class="page" id="p9">
+                <div class="front paper-texture">
+                    <h2>Las Escrituras de ST</h2>
+                    <h3 style="font-family:'Cinzel'; text-align:center; font-size:1rem; margin-top:10px; color:#8b0000;">I. La Parábola del Pastel Prohibido</h3>
+                    
+                    <p class="verse">
+                        <span class="drop-cap">A</span>conteció en el tercer día del mes duodécimo, que tras el rechazo de las Damas de la Flor, la Hermandad Verdadera se congregó en la morada de Walter.
+                    </p>
+                    <p class="verse">
+                        <span class="verse-number">13.</span> Y he aquí que llegó una invitada inesperada, llamada Loop. Entonces ST, en su sabiduría, bebió del cáliz del sacrificio para ganar su favor y abrir el camino a su hermano.
+                    </p>
+                    <p class="verse">
+                        <span class="verse-number">14.</span> Así, con precisión divina, Walter probó la dulzura del pastel; y ST, el Soñador Inmortal, da fe de que la misión fue consumada en gloria.
                     </p>
                 </div>
                 <!-- Última página, reverso -->
@@ -583,6 +707,72 @@
     </div>
 
     <script>
+        // --- API DE YOUTUBE ---
+        var player;
+        var currentVideoId = "";
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                playerVars: {
+                    'controls': 1,
+                    'autoplay': 0, 
+                    'loop': 1
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Player listo
+        }
+
+        function toggleMute() {
+            if (player && player.isMuted && player.unMute) {
+                if (player.isMuted()) {
+                    player.unMute();
+                } else {
+                    player.mute();
+                }
+            }
+        }
+
+        function toggleMusicPlayer() {
+            const container = document.getElementById("music-container");
+            container.classList.toggle("visible");
+        }
+
+        function checkMusic() {
+            if (!player || !player.loadVideoById) return;
+
+            if (currentLocation === 8) {
+                // Escrituras de Walter
+                if (currentVideoId !== 'OHTapZtu9kU') {
+                    currentVideoId = 'OHTapZtu9kU';
+                    player.loadVideoById(currentVideoId);
+                } else {
+                    if(player.getPlayerState() !== 1) player.playVideo();
+                }
+            } else if (currentLocation === 9) {
+                // Escrituras de ST
+                if (currentVideoId !== 'vWNPmEKGXc0') {
+                    currentVideoId = 'vWNPmEKGXc0';
+                    player.loadVideoById(currentVideoId);
+                } else {
+                    if(player.getPlayerState() !== 1) player.playVideo();
+                }
+            } else {
+                // Silencio para el resto (Portada, Índice, Frases)
+                if (currentVideoId !== '') {
+                    player.pauseVideo();
+                    currentVideoId = ''; 
+                }
+            }
+        }
+
         // --- SISTEMA DE SEGURIDAD (OFUSCADO) ---
         function checkSeal() {
             const input = document.getElementById("passwordInput").value;
@@ -590,6 +780,7 @@
             const overlay = document.getElementById("login-overlay");
             const bookScene = document.getElementById("bookScene");
             const controls = document.getElementById("controls");
+            const musicToggleBtn = document.getElementById("music-toggle-btn");
 
             const encodedInput = btoa(input);
             const part1 = "MjQ0";
@@ -604,6 +795,8 @@
                     bookScene.style.opacity = "1";
                     bookScene.style.transform = "scale(1)";
                     controls.style.opacity = "1";
+                    // MOSTRAR BOTÓN DE MÚSICA
+                    musicToggleBtn.style.opacity = "1";
                 }, 1500);
             } else {
                 errorMsg.style.opacity = "1";
@@ -623,7 +816,7 @@
 
         // --- LÓGICA DEL LIBRO ---
         let currentLocation = 1;
-        const numOfPages = 8;
+        const numOfPages = 9; // Aumentado a 9 páginas
         const maxLocation = numOfPages + 1;
         let isAnimating = false; // FLAG DE SEGURIDAD
         let jumpInterval = null; // CONTROL DE SALTOS
@@ -658,6 +851,7 @@
                         goNext(true); // true = fast mode
                     } else {
                         clearInterval(jumpInterval);
+                        checkMusic(); // Actualizar música al llegar
                     }
                 }, 150); // Velocidad rápida
             } 
@@ -668,6 +862,7 @@
                         goPrev(true);
                     } else {
                         clearInterval(jumpInterval);
+                        checkMusic(); // Actualizar música al llegar
                     }
                 }, 150);
             }
@@ -687,7 +882,7 @@
             if (currentLocation === 1) {
                 textToRead = "El Libro del Insano. Evangelio de los Caídos.";
             } else if (currentLocation === 2) {
-                textToRead = "Tabla de contenidos. Frases del Insano. Escrituras de Walter.";
+                textToRead = "Tabla de contenidos. Frases del Insano. Escrituras de Walter. Escrituras de ST.";
             } else if (currentLocation >= 3 && currentLocation < 8) {
                 // Lectura estándar de versículos
                 const h2 = pageEl.querySelector('h2') ? pageEl.querySelector('h2').innerText : "";
@@ -696,6 +891,8 @@
             } else if (currentLocation === 8) {
                 textToRead = "Las Escrituras de Walter. He aquí las visiones de Walter, aquel que caminó entre los mundos.";
             } else if (currentLocation === 9) {
+                textToRead = "Las Escrituras de ST. La Parábola del Pastel Prohibido. Aconteció en el tercer día del mes duodécimo, que tras el rechazo de las Damas de la Flor, la Hermandad Verdadera se congregó en la morada de Walter. Y he aquí que llegó una invitada inesperada, llamada Loop. Entonces ST, en su sabiduría, bebió del cáliz del sacrificio para ganar su favor y abrir el camino a su hermano. Así, con precisión divina, Walter probó la dulzura del pastel; y ST, el Soñador Inmortal, da fe de que la misión fue consumada en gloria.";
+            } else if (currentLocation === 10) {
                 textToRead = "Fin del libro.";
             }
 
@@ -750,6 +947,7 @@
                 
                 currentLocation++;
                 if(!fastMode) updateButtons();
+                if(!fastMode) checkMusic(); // Verificar música
 
                 // Liberar bloqueo después de la animación
                 if (!fastMode) setTimeout(() => { isAnimating = false; }, 1200);
@@ -787,6 +985,7 @@
                 }
                 
                 if(!fastMode) updateButtons();
+                if(!fastMode) checkMusic(); // Verificar música
 
                 // Liberar bloqueo
                 if (!fastMode) setTimeout(() => { isAnimating = false; }, 1200);
