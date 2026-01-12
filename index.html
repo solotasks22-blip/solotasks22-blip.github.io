@@ -269,7 +269,25 @@
         }
 
         /* --- ESTILOS DE LA TAPA --- */
-        #p1 { z-index: 16; } 
+        /* ACTUALIZACIÓN Z-INDEX PARA 18 PÁGINAS */
+        #p1 { z-index: 20; } 
+        #p2 { z-index: 19; }
+        #p3 { z-index: 18; }
+        #p4 { z-index: 17; }
+        #p5 { z-index: 16; }
+        #p6 { z-index: 15; }
+        #p7 { z-index: 14; }
+        #p8 { z-index: 13; }
+        #p9 { z-index: 12; } 
+        #p10 { z-index: 11; } 
+        #p11 { z-index: 10; } 
+        #p12 { z-index: 9; } 
+        #p13 { z-index: 8; } 
+        #p14 { z-index: 7; } 
+        #p15 { z-index: 6; } 
+        #p16 { z-index: 5; } 
+        #p17 { z-index: 4; } 
+        #p18 { z-index: 3; } 
         
         #p1 .front {
             background-color: var(--cover-color);
@@ -358,21 +376,6 @@
             height: 0;
         }
 
-        /* Z-INDEX STACK CORREGIDO PARA 14 PAGINAS */
-        #p2 { z-index: 15; }
-        #p3 { z-index: 14; }
-        #p4 { z-index: 13; }
-        #p5 { z-index: 12; }
-        #p6 { z-index: 11; }
-        #p7 { z-index: 10; }
-        #p8 { z-index: 9; }
-        #p9 { z-index: 8; } 
-        #p10 { z-index: 7; } 
-        #p11 { z-index: 6; } 
-        #p12 { z-index: 5; } 
-        #p13 { z-index: 4; } 
-        #p14 { z-index: 3; } 
-        
         h2 {
             font-family: 'Cinzel', serif;
             text-align: center;
@@ -621,7 +624,7 @@
                             <button class="index-btn" onclick="jumpToPage(8)">II. Escrituras de Walter</button>
                         </li>
                          <li>
-                            <button class="index-btn" onclick="jumpToPage(12)">III. Escrituras de ST</button>
+                            <button class="index-btn" onclick="jumpToPage(16)">III. Escrituras de ST</button>
                         </li>
                     </ul>
                     <div class="divider">~ ⚜ ~</div>
@@ -742,7 +745,7 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 10 (Walter Historia I - NUEVA) -->
+            <!-- PÁGINA 10 (Walter Historia I) -->
             <div class="page" id="p10">
                 <div class="front paper-texture">
                     <h3>Del Refugio Onírico (I)</h3>
@@ -762,7 +765,7 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 11 (Walter Historia II - NUEVA) -->
+            <!-- PÁGINA 11 (Walter Historia II) -->
             <div class="page" id="p11">
                 <div class="front paper-texture">
                     <h3>Del Refugio Onírico (II)</h3>
@@ -782,10 +785,76 @@
                 <div class="back"></div>
             </div>
 
-            <!-- SECCIÓN 3: ESCRITURAS DE ST -->
-            
-            <!-- PÁGINA 12 (ST Intro) -->
+            <!-- PÁGINA 12 (NUEVA: Jesús Intro) -->
             <div class="page" id="p12">
+                <div class="front paper-texture">
+                    <h3>El Hombre más Fuerte</h3>
+                    <p class="verse">
+                         <span class="drop-cap">E</span>l verdadero hombre fuerte no es aquel que ostenta músculos, sino quien domina su voluntad. Jesús de Nazaret, sin empuñar espada, dividió la historia, siendo el modelo supremo de fortaleza al resistir toda tentación y cultivar la virtud interior.
+                    </p>
+                    <p class="verse">
+                        <span class="verse-number">2.10</span> <b>El Dominio Propio:</b> La fortaleza es hacer lo que se debe, no lo que se desea.
+                    </p>
+                    <p class="verse">
+                        <span class="verse-number">2.11</span> En el desierto, hambriento y solo, Jesús rechazó las ofertas de ambición y ego. Nos enseña que quien no puede liderarse a sí mismo, jamás podrá liderar a otros.
+                    </p>
+                </div>
+                <div class="back"></div>
+            </div>
+
+            <!-- PÁGINA 13 (NUEVA: Reacción Justa) -->
+            <div class="page" id="p13">
+                <div class="front paper-texture">
+                    <h3>De la Reacción Justa</h3>
+                     <p class="verse">
+                         <span class="drop-cap">N</span>o confundáis mansedumbre con debilidad. Él encarnó el carácter firme; aunque sufrió traición y tortura, nunca fue esclavo de un ego herido.
+                    </p>
+                    <p class="verse">
+                        <span class="verse-number">2.12</span> <b>Control, no pasividad:</b> Cuando alzó el látigo ante los mercaderes, no fue un impulso descontrolado, sino una indignación justa ante la profanación.
+                    </p>
+                    <p class="verse">
+                        <span class="verse-number">2.13</span> Y en Getsemaní, detuvo la espada de Pedro, probando que su fuerza residía en el sacrificio voluntario, no en la incapacidad de luchar.
+                    </p>
+                </div>
+                <div class="back"></div>
+            </div>
+
+            <!-- PÁGINA 14 (NUEVA: Batalla Espiritual) -->
+            <div class="page" id="p14">
+                <div class="front paper-texture">
+                    <h3>La Batalla Espiritual</h3>
+                     <p class="verse">
+                        <span class="verse-number">2.14</span> La libertad verdadera permite amar incluso al enemigo; un amor que no es sentimiento, sino elección de una voluntad incorruptible.
+                    </p>
+                    <p class="verse">
+                        <span class="drop-cap">E</span>n el Monte de los Olivos, su angustia fue tal que sudó sangre. Ante la muerte y el peso del pecado ajeno, su decisión de decir "hágase tu voluntad" marcó el cénit de la valentía: sacrificarse por los culpables.
+                    </p>
+                </div>
+                <div class="back"></div>
+            </div>
+
+            <!-- PÁGINA 15 (NUEVA: Conclusión) -->
+            <div class="page" id="p15">
+                <div class="front paper-texture">
+                    <h3>El Liderazgo como Servicio</h3>
+                     <p class="verse">
+                        <span class="verse-number">2.15</span> El desarrollo masculino natural está ligado al sacrificio. Un buen líder es, ante todo, un buen siervo. ¿De qué sirve la fuerza si no hay a quién proteger?
+                    </p>
+                    <p class="verse">
+                        <span class="drop-cap">C</span>onstruid vuestro carácter ladrillo a ladrillo. Resistid el placer momentáneo para forjar una voluntad de hierro.
+                    </p>
+                    <p class="verse">
+                         <span class="verse-number">2.16</span> Sed guerreros que buscan la paz, gobernados por la razón, dispuestos a morir al egoísmo para servir un propósito mayor.
+                    </p>
+                     <div class="divider">†</div>
+                </div>
+                <div class="back"></div>
+            </div>
+
+            <!-- SECCIÓN 3: ESCRITURAS DE ST (MOVIDO A PAG 16) -->
+            
+            <!-- PÁGINA 16 (ST Intro) -->
+            <div class="page" id="p16">
                 <div class="front paper-texture">
                     <h2>Las Escrituras de ST</h2>
                     <div class="divider">⚜</div>
@@ -799,8 +868,8 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 13 (ST Intro Parte 1) -->
-            <div class="page" id="p13">
+            <!-- PÁGINA 17 (ST Intro Parte 1) -->
+            <div class="page" id="p17">
                 <div class="front paper-texture">
                     <h3>I. La Parábola del Pastel Prohibido (I)</h3>
                     
@@ -814,8 +883,8 @@
                 <div class="back"></div>
             </div>
 
-            <!-- PÁGINA 14 (ST Intro Parte 2) -->
-            <div class="page" id="p14">
+            <!-- PÁGINA 18 (ST Intro Parte 2) -->
+            <div class="page" id="p18">
                 <div class="front paper-texture">
                     <h3>I. La Parábola del Pastel Prohibido (II)</h3>
                     
@@ -890,9 +959,9 @@
             // Lógica de reproducción automática basada en la página
             let targetSrc = "";
 
-            if (currentLocation >= 8 && currentLocation <= 11) { // WALTER (8, 9, 10, 11)
+            if (currentLocation >= 8 && currentLocation <= 15) { // WALTER (8 hasta 15 incluido lo nuevo)
                 targetSrc = walterMusic;
-            } else if (currentLocation >= 12 && currentLocation <= 14) { // ST (12, 13, 14)
+            } else if (currentLocation >= 16 && currentLocation <= 18) { // ST (ahora empieza en 16)
                 targetSrc = stMusic;
             }
 
@@ -969,7 +1038,7 @@
 
         // --- LÓGICA DEL LIBRO ---
         let currentLocation = 1;
-        const numOfPages = 14; // AUMENTADO A 14 PÁGINAS
+        const numOfPages = 18; // AUMENTADO A 18 PÁGINAS
         const maxLocation = numOfPages + 1;
         let isAnimating = false;
         let jumpInterval = null;
@@ -1049,12 +1118,16 @@
             } else if (currentLocation === 11) { // HISTORIA WALTER II
                  const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
                 textToRead = "Del Refugio Onírico, parte dos. " + verses;
-            } else if (currentLocation === 12) { // NUEVA PORTADA ST
+            } else if (currentLocation >= 12 && currentLocation <= 15) { // NUEVO CONTENIDO DE JESUS
+                const h3 = pageEl.querySelector('h3') ? pageEl.querySelector('h3').innerText : "";
+                const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
+                textToRead = h3 + ". " + verses;
+            } else if (currentLocation === 16) { // NUEVA PORTADA ST (Era 12)
                 textToRead = "Las Escrituras de ST. Y aconteció que en los días del gran silencio, surgió la voz de ST, el Soñador Inmortal. Aquel que sacrificó su cordura en el altar del caos para forjar caminos donde solo había abismo. Prestad atención a sus parábolas, pues en ellas se esconde la llave de las puertas cerradas y el mapa de los laberintos del alma.";
-            } else if (currentLocation === 13) { // ST PARTE 1
+            } else if (currentLocation === 17) { // ST PARTE 1 (Era 13)
                  const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
                 textToRead = "Las Escrituras de ST. Parte Uno. " + verses;
-            } else if (currentLocation === 14) { // ST PARTE 2
+            } else if (currentLocation === 18) { // ST PARTE 2 (Era 14)
                  const verses = Array.from(pageEl.querySelectorAll('.verse')).map(v => v.innerText).join(". ");
                 textToRead = "Las Escrituras de ST. Parte Dos. " + verses;
             }
